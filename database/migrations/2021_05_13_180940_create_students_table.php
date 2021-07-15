@@ -18,7 +18,7 @@ class CreateStudentsTable extends Migration
             $table->increments('id')->unique();
             $table->string('student_name', 50);
             $table->date('enter');
-            $table->integer('grade_id')->unsigned();
+            $table->string('grade');
             $table->string('experience', 10);
             $table->string('description', 200)->nullable();
             $table->integer('user_id')->unsigned();
@@ -26,7 +26,6 @@ class CreateStudentsTable extends Migration
             $table->dateTime('deleted_at', 0)->nullable();
             
             //外部キー設定
-            $table->foreign('grade_id')->references('id')->on('grades')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

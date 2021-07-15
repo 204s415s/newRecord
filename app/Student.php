@@ -9,10 +9,11 @@ class Student extends Model
     protected $fillable = [
         'student_name',
         'enter',
-        'grade_id',
+        'grade',
         'experience',
         'description',
-        'user_id'
+        'user_id',
+        'sheet_id'
     ];
     
     public function user() {

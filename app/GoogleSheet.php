@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class GoogleSheet {
     public static function instance() {
-        $credentials_path = storage_path('app/json/credentials.json');
+        $credentials_path = storage_path('app/json/lev-college-43ca656233f1.json');
         $client = new \Google_Client();
         $client->setScopes([[\Google_Service_Sheets::SPREADSHEETS]]);
         $client->setAuthConfig($credentials_path);

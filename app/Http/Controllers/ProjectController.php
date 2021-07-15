@@ -15,15 +15,18 @@ class ProjectController extends Controller
         return view('project.record')->with(['students' => $students]);
     }
     
+    public function index() {
+        $project = Project::get();
+        return $project;
+    }
+    
     public function store(Request $request, Student $student) {
         $project = new Project;
-        $project->student_id = $request->input('student_id');
-        $input = $request['project'];
+        $input = $request->all();
         $project->fill($input);
         $project->save();
         
         $record = new Record;
-        $record->id = $request->id;
         $record->student_id = $request->input('student_id');
         $record->save();
         
@@ -32,6 +35,6 @@ class ProjectController extends Controller
         $project_record->record_id = $record->id;
         $project_record->save();
         
-        return redirect('projects/record');
+        return compact($project, $record, $project_record);
     }
 }
