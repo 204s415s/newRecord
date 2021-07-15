@@ -10,15 +10,11 @@ use App\Curriculum_record;
 
 class CurriculumController extends Controller
 {
-    public function record(Student $student) {
-        $students = $student->get();
-        return view('curriculum.record')->with(['students' => $students]);
+
+    public function index() {
+        $curriculum = Curriculum::get();
+        return $curriculum;
     }
-    
-    public function test() {
-        return view('vuetest');
-    }
-    
     
     public function fetch(Request $request) {
         $student_class = $request->value;
@@ -28,15 +24,11 @@ class CurriculumController extends Controller
     
     
     public function store(Request $request, Student $student) {
-        
         $curriculum = new Curriculum;
-        $curriculum->student_id = $request->input('student_id');
-        $input = $request['curriculum'];
-        $curriculum->fill($input);
-        $curriculum->save();
+        $input = $request->all();
+        $curriculum->fill($input)->save();
         
         $record = new Record;
-        $record->id = $request->id;
         $record->student_id = $request->input('student_id');
         $record->save();
         
@@ -45,6 +37,6 @@ class CurriculumController extends Controller
         $curriculum_record->record_id = $record->id;
         $curriculum_record->save();
         
-        return redirect('curricula/record');
+        return compact($curriculum, $record, $curriculum_record);
     }
 }

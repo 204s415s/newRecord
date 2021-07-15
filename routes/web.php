@@ -11,10 +11,16 @@
 |
 */
 
-/*
-Route::get('/', function () {
-    return view('welcome');
-});*/
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+//Route::get('/check', 'MypageController@student');
+
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Route::get('/', 'RecordController@top');
 
@@ -23,8 +29,6 @@ Route::get('/', function () {
 // Route::get('/students/{student}', 'StudentController@show');
 // Route::post('/students', 'StudentController@store');
 
-// Route::get('/vuetest', 'CurriculumController@test');
-
 // Route::get('/curricula/record', 'CurriculumController@record');
 // Route::get('/fetch/curricula', 'CurriculumController@fetch');
 // Route::post('/curricula', 'CurriculumController@store');
@@ -32,16 +36,20 @@ Route::get('/', function () {
 // Route::get('/projects/record', 'ProjectController@record');
 // Route::post('/projects', 'ProjectController@store');
 
-
-Route::get('/{any}', function() {
+/*
+ すべてのルートでapp.blade.phpを表示する
+ 未ログインユーザーはログイン画面にリダイレクトする
+*/
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('/{any}', function() {
     return view('app');
-})->where('any', '.*');
+    })->where('any', '.*');
+});
 
-//Route::get('/google', 'UserController@google');
+
+
 
 //Route::get('/students/index', 'StudentController@index');
 //Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');

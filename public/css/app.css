@@ -10942,3 +10942,67 @@ a.text-dark:focus {
   }
 }
 
+.btn-info {
+  color: #fff;
+}
+
+.btn-warning {
+  color: #fff;
+  background: #f8b500;
+}
+
+.btn-warning:hover {
+  color: #fff;
+  background: #e8a500;
+}
+
+.btn-warning:active {
+  color: #fff;
+  background: #e8a500;
+}
+
+.btn-orange {
+  color: #fff;
+  background: #e98035;
+}
+
+.btn-orange:hover {
+  color: #fff;
+  background: #d97025;
+}
+
+.btn-orange:focus {
+  color: #fff;
+  background: #d97025;
+}
+
+.btn-an {
+  color: #fff;
+  background: #00afcc;
+}
+
+.btn-an:hover {
+  color: #fff;
+  background: #009fbc;
+}
+
+.btn-an:focus {
+  color: #fff;
+  background: #009fbc;
+}
+
+.btn-tutuji {
+  color: #fff;
+  background: #e95285;
+}
+
+.btn-tutuji:hover {
+  color: #fff;
+  background: #d94275;
+}
+
+.btn-tutuji:focus {
+  color: #fff;
+  background: #d94275;
+}
+

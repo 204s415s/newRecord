@@ -16,7 +16,7 @@ class CreateCurriculaTable extends Migration
         Schema::create('curricula', function (Blueprint $table) {
             $table->increments('id')->unique();
             $table->integer('student_id')->unsigned();
-            $table->string('section', 10);
+            $table->string('progress', 10);
             $table->string('question', 200)->nullable();
             $table->string('aim', 10);
             $table->date('nextdate');

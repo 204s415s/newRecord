@@ -2,27 +2,27 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-6">
-                <form v-on:submit.prevent="submit">
+                <form v-on:submit.prevent="editStudent">
                     <div class="form-group row">
                         <label for="name" class="col-sm-3 col-form-label">名前</label>
-                        <input type="text" class="col-sm-9 form-control" id="name" v-model="newStudent.student_name">
+                        <input type="text" class="col-sm-9 form-control" id="name" v-model="student.student_name">
                     </div>
                     <div class="form-group row">
                         <label for="enter" class="col-sm-3 col-form-label">入学年月日</label>
-                        <input type="text" class="col-sm-9 form-control" id="enter" placeholder="19900401" v-model="newStudent.enter">
+                        <input type="text" class="col-sm-9 form-control" id="enter" placeholder="19900401" v-model="student.enter">
                     </div>
                     <div class="form-group row">
-                        <label for="grade_id" class="col-sm-3 col-form-label">学年</label>
-                        <select v-model="newStudent.grade_id">
+                        <label for="grade" class="col-sm-3 col-form-label">学年</label>
+                        <select v-model="student.grade" class="col-sm-9 form-control">
                             <option disabled value="">選択してください</option>
-                            <option v-for="grade in grades" v-bind:value="grade.id" >
+                            <option v-for="grade in grades" v-bind:value="grade.value">
                                 {{ grade.value }}
                             </option>
                         </select>
                     </div>
                     <div class="form-group row">
                         <label for="experience" class="col-sm-3 col-form-label">プログラミング経験</label>
-                        <select v-model="newStudent.experience">
+                        <select v-model="student.experience" class="col-sm-9 form-control">
                             <option v-for="experience in optionExperiences" v-bind:value="experience.name">
                                 {{ experience.name }}
                             </option>
@@ -30,18 +30,22 @@
                     </div>
                     <div class="form-group row">
                         <label for="description" class="col-sm-3 col-form-label">めも</label>
-                        <input type="textarea" class="col-sm-9 form-control" id="description" v-model="newStudent.description">
+                        <input type="textarea" class="col-sm-9 form-control" id="description" v-model="student.description">
+                    </div>
+                    <div class="form-group row">
+                        <label for="sheet_id" class="col-sm-3 col-form-label">スプレッドシートID</label>
+                        <input type="text" class="col-sm-9 form-control" id="sheet_id" v-model="student.sheet_id">
                     </div>
                     <div class="form-group row">
                         <label for="mentor" class="col-sm-3 col-form-label">担当</label>
-                        <select v-model="newStudent.user_id">
+                        <select v-model="student.user_id" class="col-sm-9 form-control">
                             <option disabled value="">選択してください</option>
                             <option v-for="user in users" v-bind:value="user.id" >
                                 {{ user.name }}
                             </option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-an">更新</button>
                 </form>
             </div>
         </div>
@@ -49,19 +53,16 @@
 </template>
  
 <script>
+    import grades from '../../datas/grade.json';
     export default {
+        props: {
+            studentId: String
+        },
         data: function() {
             return {
                 users: {},
-                grades: {},
-                newStudent: {
-                    student_name: '',
-                    enter: '',
-                    grade_id: '',
-                    experience: '',
-                    description: '',
-                    user_id: '',
-                },
+                grades: grades,
+                student: {},
                 optionExperiences:[
                     {id: 1, name:'無'},
                     {id: 2, name:'有'}
@@ -69,6 +70,12 @@
             }
         },
         methods: {
+            getStudent() {
+                axios.get('/api/students/' + this.studentId)
+                    .then((res) => {
+                        this.student = res.data;
+                    });
+            },
             selectMentors() {
                 axios.get('/api/users')
                     .then((res) => {
@@ -77,22 +84,22 @@
                         this.users = res.data;
                     });
             },
-            selectGrades() {
-                axios.get('/api/grades')
+            editStudent() {
+                axios.put('/api/students/' + this.studentId, this.student)
                     .then((res) => {
-                        this.grades = res.data;
-                    });
-            },
-            submit() {
-                axios.post('/api/students', this.newStudent)
-                    .then((res) => {
-                        this.$router.push({name: 'student.list'});
+                        this.$router.push({name: 'student.list'})
+                            console.log("更新");
+                    })
+                    .catch(err => {
+                        if(err.response) {
+                            console.log("しっぱい");
+                        }
                     });
             }
         },
         created() {
-            this.selectMentors(),
-            this.selectGrades();
-        }    
+            this.getStudent();
+            this.selectMentors();
+        }
     }
 </script>
