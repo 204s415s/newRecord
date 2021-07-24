@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row justify-content-around">
-            <div class="col-5">
+            <div class="col-md-5">
                 <td>
                     <router-link v-bind:to="{name: 'student.edit', params: {studentId: student.id}}">
                         <button class="btn btn-orange">編集</button>
@@ -25,11 +25,11 @@
                     </div>
                     <div class="form-group row border-bottom">
                         <label for="experience" class="col-sm-5 col-form-label">プログラミング経験</label>
-                        <p type="text" class="col-sm-3 form-control-plaintext" readonly id="experience">{{student.experience}}</p>
+                            <p type="text" class="col-sm-3 form-control-plaintext" readonly id="experience">{{student.experience}}</p>
                     </div>
                     <div class="form-group row border-bottom">
                         <label for="description" class="col-sm-5 col-form-label">その他</label>
-                        <p type="text" class="col-sm-3 form-control-plaintext" readonly id="description">{{student.description}}</p>
+                        <p type="text" class="col-sm-7 form-control-plaintext" id="description">{{description}}</p>
                     </div>
                     <div class="form-group row">
                         <label for="sheet_id" class="col-sm-5 col-form-label">スプレッドシートID</label>
@@ -47,10 +47,10 @@
             
         </div>
         <br />
-        <div class="row">
-            <div class="col-10 justify-content-around">
+        <div class="row justify-content-around">
+            <div class="col-10 py-5">
             <body>
-                <div>進捗記録</div>
+                <div>面談記録</div>
                 <div v-for="record in records"　class="border rounded" style="padding:10px;">
                     <p>{{ record.created_at | record }}</p>
                     <p>進捗： {{ record.progress }}</p>
@@ -79,6 +79,7 @@
         data: function() {
             return {
                 student: [],
+                description: [],
                 records: [],
                 
                 loaded: false,
@@ -101,8 +102,19 @@
             getStudent() {
                 axios.get('/api/students/' + this.studentId)
                     .then((res) => {
-                        this.student = res.data;
+                        
+                        this.student = res.data[0];
                     });
+            },
+            getDescription() {
+                axios.get('/api/students/' + this.studentId)
+                    .then((res) => {
+                        //this.description.replace(/\n/g, '\\n')
+                        this.description = res.data[1];
+                    })
+                    // newLine(description) {
+                    //     return description.replace(/\\n/g, '\n');
+                    // })
             },
             getRecord() {
                 axios.get('/api/students/' + this.studentId + '/record')
@@ -130,8 +142,16 @@
         mounted() {
             this.loaded = true;
             this.getStudent();
+            this.getDescription();
             this.getRecord();
             this.getData()
         }
     }
 </script>
+
+<style scoped>
+/* これを設定 */
+#description {
+  white-space: pre-wrap;
+}
+</style>

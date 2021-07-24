@@ -62,7 +62,6 @@
                 axios.get('/api/students')
                     .then((res) => {
                         this.students = res.data;
-                        console.log(res.data);
                 });
             },
             // getRecords() {

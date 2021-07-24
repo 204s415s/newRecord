@@ -21,6 +21,7 @@ class CreateStudentsTable extends Migration
             $table->string('grade');
             $table->string('experience', 10);
             $table->string('description', 200)->nullable();
+            $table->string('sheet_id', 50)->nullable();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
             $table->dateTime('deleted_at', 0)->nullable();

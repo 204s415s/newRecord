@@ -10,7 +10,8 @@ import StudentGraph from '../components/student/Graph';
 import CurriculumRecord from '../components/curriculum/Record';
 import ProjectRecord from '../components/project/Record';
 import Mypage from '../components/user/Mypage';
-import Calendar from '../components/user/Calendar'
+import Calendar from '../components/user/Calendar';
+//import Today from '../components/user/Today';
 
 Vue.use(VueRouter);
 
@@ -78,7 +79,9 @@ export default new VueRouter({
             path: '/calendar',
             name: 'calendar',
             component: Calendar
-        }
+        },
+        
+        
         
     ]
  });

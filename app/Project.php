@@ -11,7 +11,10 @@ class Project extends Model {
         'topical',
         'question',
         'aim',
-        'nextdate',
+        'next',
+        'style'
+        // 'nextdate',
+        // 'nexttime'
     ];
     
     public function project_record() {

@@ -9,6 +9,13 @@
      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+     <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.2.0/main.css" rel='stylesheet'>
+<link href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.2.0/main.css" rel='stylesheet'>
+<link href="https://unpkg.com/@fullcalendar/timegrid@4.3.0/main.min.css" rel='stylesheet'>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.2.0/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.3.0/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.2.0/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/vue@4.2.2/main.umd.min.js"></script>
  
      <title>{{ config('app.name', 'Vue Laravel SPA') }}</title>
  
@@ -25,15 +32,9 @@
     
  </div>
  <!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-<script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/locale-all.js"></script>
+
  <script src="{{ mix('/js/app.js') }}" defer></script>
+
  </body>
  </html>
  
