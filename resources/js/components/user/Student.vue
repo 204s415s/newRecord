@@ -42,7 +42,6 @@
                 axios.get('/api/mypage/student')
                     .then((res) => {
                         this.students = res.data;
-                        console.log(res.data);
                     })
             }
         },

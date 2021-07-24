@@ -16,6 +16,10 @@ class CreateRecordsTable extends Migration
         Schema::create('records', function (Blueprint $table) {
             $table->increments('id')->unique();
             $table->integer('student_id')->unsigned();
+            $table->dateTime('next', 0)->nullable();
+            // $table->date('nextdate');
+            // $table->time('nexttime');
+            $table->string('style', 10);
             $table->timestamps();
             $table->dateTime('deleted_at', 0)->nullable();
             

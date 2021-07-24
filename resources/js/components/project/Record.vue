@@ -34,7 +34,7 @@
                     </div>
                     <div class="form-group row">
                         <label for="nextdate" class="col-sm-3 col-form-label">次回面談予定：</label>
-                        <input type="date" class="col-sm-9 form-control" id="nextdate" v-model="newProject.nextdate" >
+                        <input type="datetime-local" class="col-sm-9 form-control" id="nextdate" v-model="newProject.nextdate" >
                     </div>
                      <button type="submit" class="btn btn-an">保存</button>
                  </form>   

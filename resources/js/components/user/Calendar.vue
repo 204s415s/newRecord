@@ -5,6 +5,7 @@
 
 <script>
 import '@fullcalendar/core/vdom'; // solves problem with Vite
+//import { Calendar } from '@fullcalendar/core';
 import FullCalendar from '@fullcalendar/vue';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -15,19 +16,15 @@ export default {
     components: {
         FullCalendar // make the <FullCalendar> tag available
     },
-    data: function() {
+    data() {
         return {
             locale: jaLocale,
+            calendarEvents: {},
             calendarOptions: {
                 plugins: [ dayGridPlugin, interactionPlugin ],
                 initialView: 'dayGridMonth'
             },
-            calendarEvents: [
-                {
-                    title: 'test',
-                    start: '2021-07-18'
-                }
-            ],
+            timeZone: 'Asia/Tokyo',
             eventColor: '#378006'
         }
     },
@@ -36,22 +33,20 @@ export default {
             axios.get('/api/mypage/calendar')
                 .then((res) => {
                     this.calendarEvents = {
-                        title: res.data[0],
-                        start: res.data[1],
-                        end: res.data[1]
+                        title: res.data.map(data => data.name),
+                        start: res.data.map(data => data.result)
                     }
+                    console.log(res.data)
                 })
         } 
     },
     mounted() {
-        //this.getEvents()
+        this.getEvents()
     }
 };
 </script>
 
 
-<style>
-@import '~/node_modules/@fullcalendar/core/main.css';
-@import '~/node_modules/@fullcalendar/daygrid/main.css';
-@import '~/node_modules/@fullcalendar/timegrid/main.css';
+<style lang='scss'>
+
 </style>

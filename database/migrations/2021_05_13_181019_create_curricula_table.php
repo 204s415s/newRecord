@@ -19,7 +19,10 @@ class CreateCurriculaTable extends Migration
             $table->string('progress', 10);
             $table->string('question', 200)->nullable();
             $table->string('aim', 10);
-            $table->date('nextdate');
+            // $table->date('nextdate');
+            // $table->time('nexttime');
+            $table->dateTime('next', 0)->nullable();
+            $table->string('style', 10);
             $table->timestamps();
             $table->dateTime('deleted_at', 0)->nullable();
             

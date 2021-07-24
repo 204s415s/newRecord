@@ -31,6 +31,7 @@ Route::group(['middeleware' => 'api'], function() {
     
     Route::get('/mypage/student', 'MypageController@student');
     Route::get('/mypage/calendar', 'MypageController@calendar');
+    Route::get('/mypage/today', 'MypageController@today');
     
     Route::get('/record/curriculum', 'CurriculumController@index');
     Route::post('/record/curriculum', 'CurriculumController@store');

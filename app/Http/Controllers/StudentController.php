@@ -74,7 +74,8 @@ class StudentController extends Controller {
     
     //生徒詳細表示
     public function show(Student $student) {
-        return $student;
+        $description = $student->description;
+        return [$student, $description];
 	}
 	
 	//進捗記録表示
@@ -94,7 +95,8 @@ class StudentController extends Controller {
 	
 	// 理解度のグラフをつくる
 	public function level(Student $student) {
-		$sheets = GoogleSheet::instance();
+	    if(isset($student->sheet_id)) {
+	        $sheets = GoogleSheet::instance();
         $sheet_id = $student->sheet_id;
         $range = 'B12:I46';
         $response = $sheets->spreadsheets_values->get($sheet_id, $range);
@@ -111,6 +113,8 @@ class StudentController extends Controller {
             }
         }
         return $levels;
+	    } 
+		
 	} 
     
     //生徒登録画面表示

@@ -1,16 +1,14 @@
 <template>
-    <div id="app" class="container h-100">
+    <div id="app" class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 py-3">
                 担当生徒
                 <students></students>
             </div>
-            
-            <div class="col-md-6">
-                    <>
-                    <div style="height=100%">
-                        <calendar></calendar>
-                    </div>
+            <div class="col-md-6 py-3">
+                    <today></today>
+                    <br />
+                    <calendar></calendar>
             </div>
         </div>
     </div>
@@ -19,10 +17,12 @@
 <script>
     import students from './Student'
     import calendar from './Calendar'
+    import today from './Today'
     export default {
         components: {
             students,
-            calendar
+            calendar,
+            today
         }
         
     }

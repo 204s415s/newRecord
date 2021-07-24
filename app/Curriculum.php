@@ -12,7 +12,10 @@ class Curriculum extends Model
         'progress',
         'question',
         'aim',
-        'nextdate',
+        'next',
+        'style'
+        // 'nextdate',
+        // 'nexttime'
     ];
     
     public function curriculum_record() {

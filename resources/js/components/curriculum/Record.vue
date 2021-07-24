@@ -8,7 +8,7 @@
                         <select class="col-sm-9 form-control" v-model="selectedEnter">
                             <option disabled value="">選択してください</option>
                             <option v-for="value in enter" v-bind:value="value.enter" >
-                                {{ value.enter | enter }}入学
+                                {{ value.enter | enter }}
                             </option>
                         </select>
                     </div>
@@ -43,9 +43,19 @@
                             </option>
                         </select>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row" v-model="newCurriculum.next">
                         <label for="nextdate" class="col-sm-3 col-form-label">次回面談予定：</label>
-                        <input type="date" class="col-sm-9 form-control" id="nextdate" v-model="newCurriculum.nextdate" >
+                        
+                            <input type="date" class="col-sm-5 form-control" id="date" v-model="date">
+                            <input type="time" class="col-sm-4 form-control" id="time" v-model="time">
+                        
+                    </div>
+                    <div class="form-group row">
+                        <label for="style" class="col-sm-3 col-form-label">形式：</label>
+                        <lavel  v-for="style in optionStyles" class="col-sm-3 form-control">
+                            <input type="radio" v-model="newCurriculum.style" v-bind:value="style.value">
+                            {{ style.value }}
+                        </lavel>
                     </div>
                      <button type="submit" class="btn btn-an">保存</button>
                  </form>   
@@ -66,20 +76,41 @@
                     progress: '',
                     question: '',
                     aim: '',
-                    nextdate: ''
+                    next: '',
+                    style: ''
                 },
+                date: null,
+                time: null,
                 sections: sections,
                 enter: [],
-                selectedEnter: ''
+                selectedEnter: '',
+                optionStyles: [
+                    { id: 1, value: '対面' },
+                    { id: 2, value: 'オンライン' }
+                ],
             }
         },
         watch: {
             selectedEnter() {
                 this.students = '',
                 this.selectStudents()
+            },
+            date() {
+                this.dateset()  
+            },
+            time() {
+                this.dateset()
             }
         },
+        computed: {
+            
+            
+        },
         methods: {
+            dateset() {
+                this.newCurriculum.next = this.date + ' ' + this.time;
+                return this.newCurriculum.next
+            },
             selectEnter() {
                 axios.get('/api/students/enter')
                     .then((res) => {
@@ -95,8 +126,9 @@
             },
             submit() {
                 axios.post('/api/record/curriculum', this.newCurriculum)
-                 .then((res) => {
-                     this.$router.push({name: 'student.list'});
+                    .then((res) => {
+                        //this.newCurriculum.next = this.date + this.time    
+                        this.$router.push({name: 'student.list'});
                  });
             }
         },

@@ -20,7 +20,10 @@ class CreateProjectsTable extends Migration
             $table->string('topical', 50)->nullable();
             $table->string('question', 200)->nullable();
             $table->string('aim', 50);
-            $table->date('nextdate');
+            $table->dateTime('next', 0)->nullable();
+            // $table->date('nextdate');
+            // $table->time('nexttime');
+            $table->string('style', 10);
             $table->timestamps();
             $table->dateTime('deleted_at', 0)->nullable();
             
