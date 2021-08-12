@@ -17,7 +17,7 @@ class GoogleSheet {
         // return new \Google_Service_Sheets($client);
         
         $credentials_file = storage_path('app/json/lev-college-43ca656233f1.json');
-        if(! $file_exists($credentials_file)) {
+        if(! file_exists($credentials_file)) {
             file_put_contents('credentials.json', getenv('GOOGLE_CREDENTIALS'));
             $credentials_file = 'credentials.json';
         }
