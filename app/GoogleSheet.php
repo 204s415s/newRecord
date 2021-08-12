@@ -17,11 +17,11 @@ class GoogleSheet {
         // return new \Google_Service_Sheets($client);
         
         
-        
-        $credentials_path = env('GOOGLE_CREDENTIALS');
+        file_put_contents('credentials.json', getenv('GOOGLE_CREDENTIALS'));
+        //$credentials_path = env('GOOGLE_CREDENTIALS');
         $client = new \Google_Client();
         $client->setScopes([[\Google_Service_Sheets::SPREADSHEETS]]);
-        $client->setAuthConfig($credentials_path);
+        $client->setAuthConfig('credentials.json');
         return new \Google_Service_Sheets($client);
         
         
