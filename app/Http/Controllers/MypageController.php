@@ -38,7 +38,7 @@ class MypageController extends Controller {
                 $projects = Project::query()->whereIn('id', $project_id)->get();
                 $results = $curricula->concat($projects)->sortByDesc('updated_at')->first()->toArray();
                 //return [$student->student_name, $results['next']];
-                array_push($calendar, ['name' => $student->student_name, 'result' =>$results['next']]);
+                array_push($calendar, ['title' => $student->student_name, 'date' =>$results['next']]);
             } else {
                 continue;
             }

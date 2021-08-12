@@ -1,6 +1,5 @@
 <template>
-    <div id="app" class="container">
-        本日の予定
+    <div id="app">
         <div v-for="today in todays">
             <p>{{ today.next | today }}　{{ today.student.student_name }}さん ({{ today.style }})</p>
         </div>
@@ -10,7 +9,6 @@
 <script>
     export default {
         data: function() {
-            
             return {
                 todays: []
             }

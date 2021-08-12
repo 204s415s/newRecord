@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row justify-content-around">
-            <div class="col-md-5">
+            <div class="col-md-5 px-1">
                 <td>
                     <router-link v-bind:to="{name: 'student.edit', params: {studentId: student.id}}">
                         <button class="btn btn-orange">編集</button>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group row border-bottom">
                         <label for="description" class="col-sm-5 col-form-label">その他</label>
-                        <p type="text" class="col-sm-7 form-control-plaintext" id="description">{{description}}</p>
+                        <p type="text" class="white-space col-sm-7 form-control-plaintext" id="description">{{student.description}}</p>
                     </div>
                     <div class="form-group row">
                         <label for="sheet_id" class="col-sm-5 col-form-label">スプレッドシートID</label>
@@ -40,24 +40,25 @@
                     </div>
                 </form>
                 </div>
-                <div class="com-8">
+                <div class="com-8 px-1">
                     <LineChart v-if="loaded" :chartData="chartdata" :options="options"></LineChart>
                     <button class="btn btn-orange" @click="getData()">更新</button>
                 </div>
-            
-        </div>
+            </div>
         <br />
         <div class="row justify-content-around">
             <div class="col-10 py-5">
             <body>
-                <div>面談記録</div>
-                <div v-for="record in records"　class="border rounded" style="padding:10px;">
-                    <p>{{ record.created_at | record }}</p>
+                面談記録
+                <div class="box shadow-none">
+                <div v-for="record in records">
+                    <span class="box-title">{{ record.recorded_at | record }}</span>
                     <p>進捗： {{ record.progress }}</p>
                     <p v-if="record.topical != null">特筆事項： {{ record.topical }}</p>
                     <p v-else> </p>
-                    <p>質問： {{ record.question }}</p>
+                    <p class="white-space">質問： {{ record.question }}</p>
                     <p>目標： {{ record.aim }}</p>
+                </div>
                 </div>
             </body>
             </div>
@@ -78,7 +79,7 @@
         
         data: function() {
             return {
-                student: [],
+                student: {},
                 description: [],
                 records: [],
                 
@@ -89,7 +90,7 @@
                     maintainAspectRatio: false,
                     scales: {
                         yAxes: [{                      //y軸設定
-                            ticks: {                      //最大値最小値設定
+                            ticks: {                   //最大値最小値設定
                                 beginAtZero: true,
                                 max: 100
                             },
@@ -102,8 +103,7 @@
             getStudent() {
                 axios.get('/api/students/' + this.studentId)
                     .then((res) => {
-                        
-                        this.student = res.data[0];
+                        this.student = res.data;
                     });
             },
             getDescription() {
@@ -142,7 +142,7 @@
         mounted() {
             this.loaded = true;
             this.getStudent();
-            this.getDescription();
+            //this.getDescription();
             this.getRecord();
             this.getData()
         }
@@ -150,8 +150,28 @@
 </script>
 
 <style scoped>
-/* これを設定 */
-#description {
-  white-space: pre-wrap;
+.box {
+    position: relative;
+    margin: 2em 0;
+    padding: 0.5em 1em;
+    border: solid 2px #00afcc;
+    border-radius: 8px;
+    background-color: transparent;
+}
+.box-title {
+    position: absolute;
+    display: inline-block;
+    top: -13px;
+    left: 10px;
+    padding: 0 5px;
+    line-height: 1;
+    font-size: 19px;
+    background: #f8fafc; /*containerの背景色*/
+    color: #00afcc;
+    font-weight: bold;
+}
+.box p {
+    margin: 0; 
+    padding: 0;
 }
 </style>

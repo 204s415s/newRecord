@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-sm-6">
+            <div class="top">
                 <form v-on:submit.prevent="submit">
                     <div class="form-group row">
                         <label for="enter" class="col-sm-3 col-form-label">入学年月日</label>
@@ -47,6 +47,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
+            
             </div>
         </div>
     </div>

@@ -10,7 +10,8 @@ import StudentGraph from '../components/student/Graph';
 import CurriculumRecord from '../components/curriculum/Record';
 import ProjectRecord from '../components/project/Record';
 import Mypage from '../components/user/Mypage';
-import Calendar from '../components/user/Calendar';
+import Table from '../components/student/Progress'
+//import Calendar from '../components/user/Calendar';
 //import Today from '../components/user/Today';
 
 Vue.use(VueRouter);
@@ -44,6 +45,12 @@ export default new VueRouter({
         },
         
         {
+            path: '/students/table',
+            name: 'student.table',
+            component: Table
+        },
+        
+        {
             path: '/students/:studentId',
             name: 'student.show',
             component: StudentShow,
@@ -74,15 +81,6 @@ export default new VueRouter({
             name: 'mypage',
             component: Mypage
         },
-        
-        {
-            path: '/calendar',
-            name: 'calendar',
-            component: Calendar
-        },
-        
-        
-        
     ]
  });
  

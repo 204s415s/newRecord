@@ -1,10 +1,10 @@
 
 <template>
-    <FullCalendar :options="calendarOptions" :events="calendarEvents" :locale="locale"/>
+    <FullCalendar :options="calendarOptions" />
 </template>
 
 <script>
-import '@fullcalendar/core/vdom'; // solves problem with Vite
+//import '@fullcalendar/core/vdom'; // solves problem with Vite
 //import { Calendar } from '@fullcalendar/core';
 import FullCalendar from '@fullcalendar/vue';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -18,12 +18,29 @@ export default {
     },
     data() {
         return {
-            locale: jaLocale,
-            calendarEvents: {},
-            calendarOptions: {
-                plugins: [ dayGridPlugin, interactionPlugin ],
-                initialView: 'dayGridMonth'
+            
+            calendarHeader: {
+            left: 'prev,next,today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
             },
+            
+            calendarOptions: {
+                plugins: [ dayGridPlugin, interactionPlugin, timeGridPlugin ],
+                initialView: 'dayGridMonth',
+                locale: jaLocale,
+                events: [
+                    // { title: 'event 1', date: '2021-07-21' },
+                    // { title: 'event 2', date: '2021-07-23' }
+                    ],
+                headerToolbar: {
+                    left: 'prev,next,today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                }
+                
+            },
+            currentEvents: [],
             timeZone: 'Asia/Tokyo',
             eventColor: '#378006'
         }
@@ -32,10 +49,7 @@ export default {
         getEvents() {
             axios.get('/api/mypage/calendar')
                 .then((res) => {
-                    this.calendarEvents = {
-                        title: res.data.map(data => data.name),
-                        start: res.data.map(data => data.result)
-                    }
+                    this.calendarOptions.events = res.data
                     console.log(res.data)
                 })
         } 
@@ -47,6 +61,6 @@ export default {
 </script>
 
 
-<style lang='scss'>
-
+<style>
+    
 </style>

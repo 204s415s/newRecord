@@ -1,8 +1,8 @@
 <template>
-    <div class="container-fluid mb-3" style="background-color: #2e4790;">
-        <div class="container">
-            <nav class="navbar navbar-dark" style="background-color: #2e4790;">
-                <span class="navbar-brand mb-0 h1">きろく</span>
+    <div class="container-fluid" style="background-color: #2e4790;">
+        <div class="fixed-top">
+            <nav class="navbar navbar-dark ptb-2 plr-4" style="background-color: #2e4790;">
+                <a href="#" class="navbar-text" style="color: #fff;">　きろく</a>
                 <div>
                     <li class="dropdown">
                         <a href="#" class="btn dropdown-toggle btn-orange" data-toggle="dropdown" type="button">進捗記録</a>
@@ -26,3 +26,7 @@
 <script>
     export default {}
 </script>
+
+<style>
+    
+</style>
