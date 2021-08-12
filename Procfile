@@ -1,2 +1,2 @@
 web: vendor/bin/heroku-php-apache2 public
-${GOOGLE_CREDENTIALS} > /app/google-credentials.json
+web: echo ${GOOGLE_CREDENTIALS} > /app/google-credentials.json

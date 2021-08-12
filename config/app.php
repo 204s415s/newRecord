@@ -227,5 +227,12 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Google cloud Platform
+    |--------------------------------------------------------------------------
+    */
+    
+    'credentials' => env('GOOGLE_CREDENTIALS'),
 ];
