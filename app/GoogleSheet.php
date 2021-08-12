@@ -18,7 +18,7 @@ class GoogleSheet {
         
         
         
-        $credentials_path = config('GOOGLE_CREDENTIALS');
+        $credentials_path = config('app.credentials');
         $client = new \Google_Client();
         $client->setScopes([[\Google_Service_Sheets::SPREADSHEETS]]);
         $client->setAuthConfig($credentials_path);
