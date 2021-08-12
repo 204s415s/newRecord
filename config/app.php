@@ -234,5 +234,5 @@ return [
     |--------------------------------------------------------------------------
     */
     
-    //'credentials' => env('GOOGLE_CREDENTIALS'),
+    'credentials' => env('GOOGLE_CREDENTIALS'),
 ];
