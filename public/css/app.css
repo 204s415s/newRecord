@@ -11006,3 +11006,15 @@ a.text-dark:focus {
   background: #d94275;
 }
 
+.table-tutuji {
+  background: #e95285;
+}
+
+.white-space {
+  white-space: pre-wrap;
+}
+
+.container {
+  padding-top: 80px;
+}
+

@@ -4,6 +4,10 @@
             <div class="col-sm-8">
                 <form v-on:submit.prevent="submit">
                     <div class="form-group row">
+                        <label for="recorded_at" class="col-sm-3 col-form-label">記録日</label>
+                            <input type="datetime" class="col-sm-5 form-control" id="recorded_at" v-model="newCurriculum.recorded_at">
+                    </div>
+                    <div class="form-group row">
                         <label for="enter" class="col-sm-3 col-form-label">入学年月：</label>
                         <select class="col-sm-9 form-control" v-model="selectedEnter">
                             <option disabled value="">選択してください</option>
@@ -45,17 +49,17 @@
                     </div>
                     <div class="form-group row" v-model="newCurriculum.next">
                         <label for="nextdate" class="col-sm-3 col-form-label">次回面談予定：</label>
-                        
                             <input type="date" class="col-sm-5 form-control" id="date" v-model="date">
                             <input type="time" class="col-sm-4 form-control" id="time" v-model="time">
-                        
                     </div>
                     <div class="form-group row">
-                        <label for="style" class="col-sm-3 col-form-label">形式：</label>
-                        <lavel  v-for="style in optionStyles" class="col-sm-3 form-control">
-                            <input type="radio" v-model="newCurriculum.style" v-bind:value="style.value">
+                        <label class="col-sm-3 col-form-label">形式：</label>
+                        <label v-for="style in optionStyles" class="col-sm-3 form-control" for="style.id">
+                            
+                            <input type="radio" id="style.id" v-model="newCurriculum.style" :value="style.value" />
                             {{ style.value }}
-                        </lavel>
+                           
+                        </label>
                     </div>
                      <button type="submit" class="btn btn-an">保存</button>
                  </form>   
@@ -77,7 +81,8 @@
                     question: '',
                     aim: '',
                     next: '',
-                    style: ''
+                    style: '',
+                    recorded_at: '',
                 },
                 date: null,
                 time: null,
@@ -121,7 +126,6 @@
                 axios.get('/api/' + this.selectedEnter)
                     .then((res) => {
                         this.students = res.data;
-                        console.log(res.data)
                     });
             },
             submit() {

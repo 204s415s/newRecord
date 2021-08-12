@@ -33,6 +33,7 @@ class CurriculumController extends Controller
         $record->student_id = $request->input('student_id');
         $record->next = $request->input('next');
         $record->style = $request->input('style');
+        $record->recorded_at = $request->input('recorded_at');
         // $record->nextdate = $request->input('nextdate');
         // $record->nexttime = $request->input('nexttime');
         $record->save();

@@ -14,8 +14,7 @@
                     <div class="form-group row">
                         <label for="grade" class="col-sm-3 col-form-label">学年</label>
                         <select v-model="student.grade" class="col-sm-9 form-control">
-                            <option disabled value="">選択してください</option>
-                            <option v-for="grade in grades" v-bind:value="grade.value">
+                            <option v-for="grade in grades" v-bind:value="grade.value"  placeholder="student.grade">
                                 {{ grade.value }}
                             </option>
                         </select>
@@ -30,7 +29,7 @@
                     </div>
                     <div class="form-group row">
                         <label for="description" class="col-sm-3 col-form-label">めも</label>
-                        <input type="textarea" class="col-sm-9 form-control" id="description" v-model="student.description">
+                        <textarea class="col-sm-9 form-control" id="description" v-model="student.description"></textarea>
                     </div>
                     <div class="form-group row">
                         <label for="sheet_id" class="col-sm-3 col-form-label">スプレッドシートID</label>

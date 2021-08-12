@@ -74,8 +74,8 @@ class StudentController extends Controller {
     
     //生徒詳細表示
     public function show(Student $student) {
-        $description = $student->description;
-        return [$student, $description];
+        //$description = $student->description;
+        return $student;
 	}
 	
 	//進捗記録表示
@@ -97,25 +97,48 @@ class StudentController extends Controller {
 	public function level(Student $student) {
 	    if(isset($student->sheet_id)) {
 	        $sheets = GoogleSheet::instance();
-        $sheet_id = $student->sheet_id;
-        $range = 'B12:I46';
-        $response = $sheets->spreadsheets_values->get($sheet_id, $range);
-        $values = $response->getValues();
+            $sheet_id = $student->sheet_id;
+            $range = 'B12:I46';
+            $response = $sheets->spreadsheets_values->get($sheet_id, $range);
+            $values = $response->getValues();
     
-        $levels = array();
-        foreach($values as $value) {
-            $check = count($value);
-            if ($check == 7) {
-                $understanding = str_replace('%', '', $value[5]);
-                array_push($levels, ["section"=>$value[0] , "understanding"=>$understanding]);
-            } else {
-                continue;
+            $levels = array();
+            foreach($values as $value) {
+                $check = count($value);
+                if ($check == 7) {
+                    $understanding = str_replace('%', '', $value[5]);
+                    array_push($levels, ["section"=>$value[0] , "understanding"=>$understanding]);
+                } else {
+                    continue;
+                }
             }
-        }
-        return $levels;
+            return $levels;
 	    } 
-		
 	} 
+	
+	//セクションを出す
+	public function label() {
+	    $students = Student::all();
+	    $sections = array();
+	    foreach($students as $student){
+	        if(isset($student->sheet_id)) {
+	        $sheets = GoogleSheet::instance();
+            $sheet_id = $student->sheet_id;
+            $range = 'B12:I46';
+            $response = $sheets->spreadsheets_values->get($sheet_id, $range);
+            $values = $response->getValues();
+            foreach($values as $value) {
+                $check = count($value);
+                if ($check == 7) {
+                    array_push($sections, $value[0]);
+                } else {
+                    continue;
+                }
+            }
+            return $sections;
+	        } 
+	    }
+	}
     
     //生徒登録画面表示
     public function create() {
@@ -164,6 +187,7 @@ class StudentController extends Controller {
                         if($sub_key == 6) {
                             $checks = array();
                             $checks = $checks + array($sub_key => $sub_value);
+                            //print_r($checks);
                             foreach($checks as $key => $value) {
                                 if ($value === "TRUE") {
                                         $i++;
@@ -180,6 +204,39 @@ class StudentController extends Controller {
 	        }
 	    }
         return $counts;
+	}
+	
+	//完了度の表を作る
+	public function table() {
+	    $students = Student::all();
+	    $params = array();
+	    foreach ($students as $student) {
+	        $clears = array();
+	        if(isset($student->sheet_id)) {
+	            $sheets = GoogleSheet::instance();
+                $sheet_id = $student->sheet_id;
+                $range = 'B12:I46';
+                $response = $sheets->spreadsheets_values->get($sheet_id, $range);
+                $values = $response->getValues();
+                //dd($values);
+                //TRUE・FALSEのセルだけ抜き出す。
+                foreach($values as $value) {
+                    $check = count($value);
+                    if ($check == 7 || $check == 8) {
+                        if ($value[6] == "TRUE") {
+                            $color = "table-tutuji";
+                        } else {
+                            $color = "table-light";
+                        }
+                        array_push($clears, $color);
+                    } else {
+                        continue;
+                    }  
+                }
+	        }
+	        array_push($params, $clears);
+	    }
+	    return [$students, $params];
 	}
 	
 	//入学年月を選択肢として送る

@@ -15,26 +15,38 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Route::get('/check', 'MypageController@student');
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
-// Route::get('/', 'RecordController@top');
 
-// Route::get('/students/index', 'StudentController@index');
-// Route::get('/students/create', 'StudentController@create');
-// Route::get('/students/{student}', 'StudentController@show');
-// Route::post('/students', 'StudentController@store');
+Route::get('/api/users', 'UserController@index');
+Route::get('/api/students', 'StudentController@index');
+Route::get('/api/students/clear', 'StudentController@clear');
+Route::get('/api/students/enter', 'StudentController@enter');
+Route::get('/api/students/label', 'StudentController@label');
+Route::get('/api/students/table', 'StudentController@table');
+Route::post('/api/students', 'StudentController@store');
+Route::get('/api/students/{student}', 'StudentController@show');
+Route::get('/api/students/{student}/record', 'StudentController@record');
+Route::get('/api/students/{student}/level', 'StudentController@level');
+Route::put('/api/students/{student}', 'StudentController@update');
+Route::delete('/api/students/{student}', 'StudentController@destroy');
 
-// Route::get('/curricula/record', 'CurriculumController@record');
-// Route::get('/fetch/curricula', 'CurriculumController@fetch');
-// Route::post('/curricula', 'CurriculumController@store');
+Route::get('/api/mypage/student', 'MypageController@student');
+Route::get('/api/mypage/calendar', 'MypageController@calendar');
+Route::get('/api/mypage/today', 'MypageController@today');
 
-// Route::get('/projects/record', 'ProjectController@record');
-// Route::post('/projects', 'ProjectController@store');
+Route::get('/api/record/curriculum', 'CurriculumController@index');
+Route::post('/api/record/curriculum', 'CurriculumController@store');
+
+Route::get('/api/record/project', 'ProjectController@index');
+Route::post('/api/record/project', 'ProjectController@store');
+
+Route::get('/api/{enter}', 'StudentController@select');
+
 
 /*
  すべてのルートでapp.blade.phpを表示する
@@ -45,11 +57,3 @@ Route::group(['middleware' => ['auth']], function() {
     return view('app');
     })->where('any', '.*');
 });
-
-
-
-
-//Route::get('/students/index', 'StudentController@index');
-//Route::get('/home', 'HomeController@index')->name('home');
-
-

@@ -22,9 +22,10 @@ import BarChart from '../graph/Bar.js'
                 chartdata: null,
                 options: {
                     responsive: true,
+                    scaleLabel: null,
                     maintainAspectRatio: false,
                     scales: {
-                        yAxes: [{                      //y軸設定
+                        xAxes: [{                         //y軸設定
                             ticks: {                      //最大値最小値設定
                                 beginAtZero: true,
                                 stepSize: 1,               //軸間隔
@@ -50,12 +51,13 @@ import BarChart from '../graph/Bar.js'
                             ]
                         }
                     })
-            },
+            }
         },
         
         mounted() {
             this.loaded = true
             this.getData()
+            //this.getLabel()
         }
     }
 </script>

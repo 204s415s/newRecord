@@ -13,7 +13,8 @@ class Curriculum extends Model
         'question',
         'aim',
         'next',
-        'style'
+        'style',
+        'recorded_at'
         // 'nextdate',
         // 'nexttime'
     ];

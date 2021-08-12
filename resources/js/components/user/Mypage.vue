@@ -1,15 +1,17 @@
 <template>
     <div id="app" class="container">
         <div class="row">
-            <div class="col-md-6 py-3">
+            <div class="col-md-7">
+                本日の予定
+                <today></today>
+                <br />
+                <calendar></calendar>
+            </div>
+            <div class="col-md-5">
                 担当生徒
                 <students></students>
             </div>
-            <div class="col-md-6 py-3">
-                    <today></today>
-                    <br />
-                    <calendar></calendar>
-            </div>
+            
         </div>
     </div>
 </template>

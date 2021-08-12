@@ -7,8 +7,12 @@
             <router-link v-bind:to="{name: 'student.graph'}">
                 <button class="btn btn-an">グラフ</button>
             </router-link>
+            <router-link v-bind:to="{name: 'student.table'}">
+                <button class="btn btn-an">表</button>
+            </router-link>
         </div>
-        <table class="table table-hover">
+        <div class="table-bordered">
+        <table class="table table-bordered">
             <thead class="thead-light">
             <tr>
                 <th scope="col">入学年月</th>
@@ -28,7 +32,7 @@
                     <td></td>
                     <td>{{ student.user.name}}</td>
                     <td>
-                        <router-link v-bind:to="{name: 'student.show', params: {studentId: student.id.toString()}}">
+                        <router-link v-bind:to="{name: 'student.show', params: {studentId: student.id}}">
                             <button class="btn btn-an">Show</button>
                         </router-link>
                     </td>
@@ -38,14 +42,21 @@
                 </tr>
             </tbody>
         </table>
+        </div>
     </div>
 </template>
 
 <script>
     export default {
+        props: {
+            studentId: {
+                type: String
+            }
+        },
         data: function() {
             return {
                 students: {
+                    id: '',
                     student_name: '',
                     enter: '',
                     grade: '',
