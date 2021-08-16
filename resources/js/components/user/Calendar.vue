@@ -1,6 +1,11 @@
 
 <template>
-    <FullCalendar :options="calendarOptions" />
+    <div class="calendar pb-3">
+        <FullCalendar :options="calendarOptions" />
+        <Modal v-show="showContent" v-on:from-child="closeModal()"></Modal>
+       
+        
+    </div>
 </template>
 
 <script>
@@ -11,20 +16,15 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import jaLocale from '@fullcalendar/core/locales/ja';
+import Modal from './Modal';
 
 export default {
     components: {
-        FullCalendar // make the <FullCalendar> tag available
+        FullCalendar, // make the <FullCalendar> tag available
+        Modal
     },
     data() {
         return {
-            
-            calendarHeader: {
-            left: 'prev,next,today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            },
-            
             calendarOptions: {
                 plugins: [ dayGridPlugin, interactionPlugin, timeGridPlugin ],
                 initialView: 'dayGridMonth',
@@ -37,12 +37,11 @@ export default {
                     left: 'prev,next,today',
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                }
-                
+                },
+                height: 500,
+                eventClick: this.handleEventClick,
             },
-            currentEvents: [],
-            timeZone: 'Asia/Tokyo',
-            eventColor: '#378006'
+            showContent: false
         }
     },
     methods: {
@@ -50,9 +49,14 @@ export default {
             axios.get('/api/mypage/calendar')
                 .then((res) => {
                     this.calendarOptions.events = res.data
-                    console.log(res.data)
                 })
-        } 
+        },
+        handleEventClick(clickInfo) {
+            this.showContent = true
+        },
+        closeModal() {
+            this.showContent = false
+        }
     },
     mounted() {
         this.getEvents()
@@ -62,5 +66,7 @@ export default {
 
 
 <style>
-    
+    .calendar {
+        min-height: 500px;
+    }
 </style>

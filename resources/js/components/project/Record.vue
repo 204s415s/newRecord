@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <div class="content">
         <div class="row justify-content-center">
             <div class="col-sm-6">
                 <form v-on:submit.prevent="submit">
@@ -38,7 +39,7 @@
                     </div>
                      <button type="submit" class="btn btn-an">保存</button>
                  </form>   
-                   
+            </div>       
             </div>
         </div>
     </div>

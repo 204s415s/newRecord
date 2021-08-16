@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <div class="content">
         <div class="row justify-content-around">
             <div class="col-md-5 px-1">
                 <td>
@@ -49,22 +50,30 @@
         <div class="row justify-content-around">
             <div class="col-10 py-5">
             <body>
-                面談記録
-                <div class="box shadow-none">
+                <p id="heading">面談記録</p>
+                
                 <div v-for="record in records">
-                    <span class="box-title">{{ record.recorded_at | record }}</span>
-                    <p>進捗： {{ record.progress }}</p>
-                    <p v-if="record.topical != null">特筆事項： {{ record.topical }}</p>
-                    <p v-else> </p>
-                    <p class="white-space">質問： {{ record.question }}</p>
-                    <p>目標： {{ record.aim }}</p>
+                    <div class="box shadow-none">
+                        <span class="box-title">{{ record.recorded_at | record }}</span>
+                        <p>進捗： {{ record.progress }}</p>
+                        <p v-if="record.topical != null">特筆事項： {{ record.topical }}</p>
+                        <p v-else> </p>
+                        <p class="white-space">質問： {{ record.question }}</p>
+                        <p>目標： {{ record.aim }}</p>
+                    </div>
                 </div>
-                </div>
+                <li class="dropdown">
+                    <a href="#" class="btn dropdown-toggle btn-blue" data-toggle="dropdown" type="button">進捗記録</a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="dropdown-item"><router-link v-bind:to="{name: 'curriculum.record'}">カリキュラム</router-link></li>
+                        <li class="dropdown-item"><router-link v-bind:to="{name: 'project.record'}">成果物</router-link></li>
+                    </ul>
+                </li>
             </body>
             </div>
         </div>   
             
-        
+    </div>
     </div>
 </template>
  
@@ -106,16 +115,6 @@
                         this.student = res.data;
                     });
             },
-            getDescription() {
-                axios.get('/api/students/' + this.studentId)
-                    .then((res) => {
-                        //this.description.replace(/\n/g, '\\n')
-                        this.description = res.data[1];
-                    })
-                    // newLine(description) {
-                    //     return description.replace(/\\n/g, '\n');
-                    // })
-            },
             getRecord() {
                 axios.get('/api/students/' + this.studentId + '/record')
                     .then((res) => {
@@ -142,7 +141,6 @@
         mounted() {
             this.loaded = true;
             this.getStudent();
-            //this.getDescription();
             this.getRecord();
             this.getData()
         }
@@ -166,7 +164,7 @@
     padding: 0 5px;
     line-height: 1;
     font-size: 19px;
-    background: #f8fafc; /*containerの背景色*/
+    background: #ffffff; /*containerの背景色*/
     color: #00afcc;
     font-weight: bold;
 }

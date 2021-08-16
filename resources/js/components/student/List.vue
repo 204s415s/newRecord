@@ -1,17 +1,18 @@
 <template>
     <div id="app" class="container">
-        <div>
+        <div class="content">
+        <div class="mb-2">
             <router-link v-bind:to="{name: 'student.create'}">
-                <button class="btn btn-an">登録</button>
+                <button class="btn btn-orange">登録</button>
             </router-link>
             <router-link v-bind:to="{name: 'student.graph'}">
-                <button class="btn btn-an">グラフ</button>
+                <button class="btn btn-orange">グラフ</button>
             </router-link>
             <router-link v-bind:to="{name: 'student.table'}">
-                <button class="btn btn-an">表</button>
+                <button class="btn btn-orange">表</button>
             </router-link>
         </div>
-        <div class="table-bordered">
+        
         <table class="table table-bordered">
             <thead class="thead-light">
             <tr>

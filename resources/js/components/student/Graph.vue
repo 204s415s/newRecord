@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <div class="content">
         <div class="column">
             <h3>Barchart</h3>
             <BarChart v-if="loaded" :chartData="chartdata" :options="options"></BarChart>
@@ -7,6 +8,7 @@
             <router-link v-bind:to="{name: 'student.list'}">
                 <button class="btn btn-orange">戻る</button>
             </router-link>
+        </div>
         </div>
     </div>
 </template>

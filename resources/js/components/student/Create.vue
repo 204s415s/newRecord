@@ -1,8 +1,11 @@
 <template>
     <div class="container">
+        <div class="content">
         <div class="row justify-content-center">
             <div class="top">
                 <form v-on:submit.prevent="submit">
+                    
+                    
                     <div class="form-group row">
                         <label for="enter" class="col-sm-3 col-form-label">入学年月日</label>
                         <input type="date" class="col-sm-9 form-control" id="enter" placeholder="19900401" v-model="newStudent.enter">
@@ -45,9 +48,10 @@
                             </option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-orange mb-5" v-if="clear">Submit</button>
+                    <button v-else type="button" class="btn btn-secondary mb-5" disabled>Submit</button>
                 </form>
-            
+            </div>
             </div>
         </div>
     </div>
@@ -58,6 +62,7 @@
     export default {
         data: function() {
             return {
+                errors: [],
                 users: {},
                 grades: grades,
                 newStudent: {
@@ -72,10 +77,27 @@
                 optionExperiences:[
                     {id: 1, name:'無'},
                     {id: 2, name:'有'}
-                ]
+                ],
+                clear: false
+            }
+        },
+        watch: {
+            newStudent: {
+                handler: function(newValue, oldValue) {
+                    this.checkForm()
+                },
+                deep: true
             }
         },
         methods: {
+            checkForm() {
+                if (this.newStudent.student_name !== '' && this.newStudent.enter !== '' && this.newStudent.grade !== '' 
+                && this.newStudent.experience !== '' && this.newStudent.user_id !== '' ) {
+                    return this.clear = true;
+                } else {
+                    return this.clear = false;
+                }
+            },
             selectMentors() {
                 axios.get('/api/users')
                     .then((res) => {
@@ -88,12 +110,12 @@
                 axios.post('/api/students', this.newStudent)
                     .then((res) => {
                         this.$router.push({name: 'student.list'});
-                        console.log(this.newStudent);
                     });
             }
         },
         created() {
             this.selectMentors()
+            this.checkForm()
         }    
     };
 </script>

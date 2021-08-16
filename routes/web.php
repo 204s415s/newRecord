@@ -15,13 +15,16 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 
+/*
+|-----------------------
+|   api取得のためのURL
+|-----------------------
+*/
 Route::get('/api/users', 'UserController@index');
 Route::get('/api/students', 'StudentController@index');
 Route::get('/api/students/clear', 'StudentController@clear');
@@ -49,8 +52,10 @@ Route::get('/api/{enter}', 'StudentController@select');
 
 
 /*
- すべてのルートでapp.blade.phpを表示する
- 未ログインユーザーはログイン画面にリダイレクトする
+|-----------------------
+|   すべてのルートでapp.blade.phpを表示する
+|   未ログインユーザーはログイン画面にリダイレクトする
+|-----------------------
 */
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/{any}', function() {
