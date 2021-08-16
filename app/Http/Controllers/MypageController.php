@@ -44,6 +44,7 @@ class MypageController extends Controller {
             }
         }
         return $calendar;
+        //dd($calendar);
     }
     
     public function today() {
@@ -55,9 +56,9 @@ class MypageController extends Controller {
                                     ->whereDate('next', '=', Carbon::today())
                                     ->with('student')
                                     ->get();
-            $todays = $todays->concat($today);
+            $todays = $todays->concat($today)->sortBy('next');
         }
-        
+        //dd($todays);
         return $todays;
     }
 }

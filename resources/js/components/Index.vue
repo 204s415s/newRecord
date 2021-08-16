@@ -1,16 +1,17 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-sm-6">
-                <div class="content">
-                    <p>進捗記録</p>
+            <div class="content">
+                <div>進捗記録</div>
+                <div class="mb-2">
                     <router-link v-bind:to="{name: 'curriculum.record'}">
-                        <button class="btn btn-info btn-lg">カリキュラム</button>
+                        <button class="btn btn-orange btn-lg mxy-1">カリキュラム</button>
                     </router-link>
                     <router-link v-bind:to="{name: 'project.record'}">
-                        <button class="btn btn-warning btn-lg">成果物</button>
+                        <button class="btn btn-blue btn-lg mxy-1">成果物</button>
                     </router-link>
-                    <br>
+                </div>
+                <div>
                     <router-link v-bind:to="{name: 'student.list'}">
                         生徒一覧
                     </router-link> / 
@@ -31,6 +32,7 @@
     .container {
         posision: relative;
         height:500px;
+        background: #fff;
     }
     
 </style>

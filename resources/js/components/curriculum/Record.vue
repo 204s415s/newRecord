@@ -1,11 +1,12 @@
 <template>
     <div class="container">
+        <div class="content">
         <div class="row justify-content-center">
             <div class="col-sm-8">
                 <form v-on:submit.prevent="submit">
                     <div class="form-group row">
-                        <label for="recorded_at" class="col-sm-3 col-form-label">記録日</label>
-                            <input type="datetime" class="col-sm-5 form-control" id="recorded_at" v-model="newCurriculum.recorded_at">
+                        <label for="recorded_at" class="col-sm-3 col-form-label">記録日：</label>
+                            <input type="date" class="col-sm-5 form-control" id="recorded_at" v-model="newCurriculum.recorded_at">
                     </div>
                     <div class="form-group row">
                         <label for="enter" class="col-sm-3 col-form-label">入学年月：</label>
@@ -61,9 +62,9 @@
                            
                         </label>
                     </div>
-                     <button type="submit" class="btn btn-an">保存</button>
+                     <button type="submit" class="btn btn-an mb-5">保存</button>
                  </form>   
-                   
+            </div>       
             </div>
         </div>
     </div>
@@ -132,7 +133,7 @@
                 axios.post('/api/record/curriculum', this.newCurriculum)
                     .then((res) => {
                         //this.newCurriculum.next = this.date + this.time    
-                        this.$router.push({name: 'student.list'});
+                        this.$router.push({name: 'student.show'});
                  });
             }
         },

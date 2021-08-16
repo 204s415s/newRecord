@@ -1,7 +1,6 @@
 <template>
     <div id="app" class="container">
-        
-            
+        <div class="content">
         <!-- 二つのテーブルをくっ付ける -->
         <div class="flex">
             <div class="left">
@@ -14,22 +13,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                    
-                    <tr v-for="student in students">
-                        
-                            <td>{{ student.enter | enter }}</td>
-                            <td>{{ student.student_name }}</td>
-                            <td>{{ student.user.name }}</td>
-                        
+                    <tr class="cell" v-for="student in students">
+                        <td>{{ student.enter | enter }}</td>
+                        <td>{{ student.student_name }}</td>
+                        <td>{{ student.user.name }}</td>
                     </tr>
-                    
                 </tbody>
             </table>
             </div>
-        
             
             <div class="table-responsive">
-            <table class="table-bordered">
+            <div class="table-bordered">
                 <thead class="font-weight-normal">
                 <tr class="small" scope="col">
                     <th v-for="section in sections" style="padding: 0.5em;" >{{ section }}</th>
@@ -41,7 +35,7 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>
+            </div>
             </div>
         </div>
         
@@ -49,14 +43,13 @@
         <router-link v-bind:to="{name: 'student.list'}">
             <button class="btn btn-orange">戻る</button>
         </router-link>
+        </div>
+        
     </div>
 </template>
     
 <style>
-    .table {
-        height: 200px;
-        
-    }
+    
     .small {
         height: 33.28px;
     }
