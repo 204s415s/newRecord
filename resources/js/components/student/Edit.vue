@@ -10,7 +10,7 @@
                     </div>
                     <div class="form-group row">
                         <label for="enter" class="col-sm-3 col-form-label">入学年月日</label>
-                        <input type="text" class="col-sm-9 form-control" id="enter" placeholder="19900401" v-model="student.enter">
+                        <input type="text" class="col-sm-9 form-control" id="enter" v-model="student.enter">
                     </div>
                     <div class="form-group row">
                         <label for="grade" class="col-sm-3 col-form-label">学年</label>

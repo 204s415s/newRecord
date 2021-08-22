@@ -62,10 +62,10 @@
                         <p>目標： {{ record.aim }}</p>
                     </div>
                 </div>
-                <li class="dropdown">
+                <li class="dropdown dropright">
                     <a href="#" class="btn dropdown-toggle btn-blue" data-toggle="dropdown" type="button">進捗記録</a>
                     <ul class="dropdown-menu" role="menu">
-                        <li class="dropdown-item"><router-link v-bind:to="{name: 'curriculum.record'}">カリキュラム</router-link></li>
+                        <li class="dropdown-item"><router-link v-bind:to="{name: 'curriculum.record', params: {studentId: student.id}}">カリキュラム</router-link></li>
                         <li class="dropdown-item"><router-link v-bind:to="{name: 'project.record'}">成果物</router-link></li>
                     </ul>
                 </li>

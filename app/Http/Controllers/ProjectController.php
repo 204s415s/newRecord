@@ -22,12 +22,14 @@ class ProjectController extends Controller
     
     public function store(Request $request, Student $student) {
         $project = new Project;
-        $input = $request->all();
-        $project->fill($input);
-        $project->save();
+        $input = $request->input();
+        $project->fill($input)->save();
         
         $record = new Record;
         $record->student_id = $request->input('student_id');
+        $record->next = $request->input('next');
+        $record->style = $request->input('style');
+        $record->recorded_at = $request->input('recorded_at');
         $record->save();
         
         $project_record = new Project_record;

@@ -12,7 +12,8 @@ class Project extends Model {
         'question',
         'aim',
         'next',
-        'style'
+        'style',
+        'recorded_at'
         // 'nextdate',
         // 'nexttime'
     ];

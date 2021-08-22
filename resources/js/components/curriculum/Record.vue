@@ -21,7 +21,7 @@
                         <label for="name" class="col-sm-3 col-form-label">名前：</label>
                         <select v-model="newCurriculum.student_id" class="col-sm-9 form-control">
                             <option disabled value="">選択してください</option>
-                            <option v-for="student in students" v-bind:value="student.id" >
+                            <option v-for="student in students" v-bind:value="student.id" placeholder="student.student_name">
                                 {{ student.student_name }}
                             </option>
                         </select>
@@ -73,9 +73,15 @@
 <script>
     import sections from '../../datas/section.json';
     export default{
+        props: {
+            studentId: {
+                type: String
+            }
+        },
         data: function() {
             return {
                 students: {},
+                sentStudent: {},
                 newCurriculum: {
                     student_id: '',
                     progress: '',
@@ -116,6 +122,13 @@
             dateset() {
                 this.newCurriculum.next = this.date + ' ' + this.time;
                 return this.newCurriculum.next
+            },
+            sentDatas() {
+                axios.get('/api/students/' + this.studentId)
+                    .then((res) => {
+                        this.sentStudent = res.data;
+                        console.log(res.data)
+                    })
             },
             selectEnter() {
                 axios.get('/api/students/enter')
