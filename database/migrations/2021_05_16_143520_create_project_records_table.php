@@ -19,8 +19,8 @@ class CreateProjectRecordsTable extends Migration
             $table->timestamps();
             $table->dateTime('deleted_at', 0)->nullable();
             
-            $table->foreign('project_id')->references('id')->on('projects');
-            $table->foreign('record_id')->references('id')->on('records');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
+            $table->foreign('record_id')->references('id')->on('records')->onDelete('cascade');
         });
     }
 

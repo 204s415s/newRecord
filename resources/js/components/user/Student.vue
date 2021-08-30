@@ -1,7 +1,7 @@
 <template>
     <div id="app">
     <table class="table table-bordered">
-        <thead class="thead-light">
+        <thead class="thead">
             <tr>
                 <th scope="col">入学年月</th>
                 <th scope="col">名前</th>

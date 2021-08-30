@@ -2,9 +2,7 @@
 <template>
     <div class="calendar pb-3">
         <FullCalendar :options="calendarOptions" />
-        <Modal v-show="showContent" v-on:from-child="closeModal()"></Modal>
-       
-        
+        <Modal v-show="showContent" v-on:from-child="closeModal()" :info="clickInfo"></Modal>
     </div>
 </template>
 
@@ -19,6 +17,7 @@ import jaLocale from '@fullcalendar/core/locales/ja';
 import Modal from './Modal';
 
 export default {
+    
     components: {
         FullCalendar, // make the <FullCalendar> tag available
         Modal
@@ -41,7 +40,9 @@ export default {
                 height: 500,
                 eventClick: this.handleEventClick,
             },
-            showContent: false
+            showContent: false,
+            clickInfo: {},
+            modal: false
         }
     },
     methods: {
@@ -53,6 +54,8 @@ export default {
         },
         handleEventClick(clickInfo) {
             this.showContent = true
+            this.clickInfo = clickInfo
+            console.log(clickInfo.event)
         },
         closeModal() {
             this.showContent = false

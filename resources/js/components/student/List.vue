@@ -14,12 +14,11 @@
         </div>
         
         <table class="table table-bordered">
-            <thead class="thead-light">
+            <thead class="thead" >
             <tr>
                 <th scope="col">入学年月</th>
                 <th scope="col">名前</th>
                 <th scope="col">学年</th>
-                <th scope="col">最新進捗</th>
                 <th scope="col">担当メンター</th>
                 <th scope="col">詳細</th>
                 <th scope="col">削除</th>
@@ -30,7 +29,6 @@
                     <td scope="row">{{ student.enter | enter}}</td>
                     <td>{{ student.student_name }}</td>
                     <td>{{ student.grade }}</td>
-                    <td></td>
                     <td>{{ student.user.name}}</td>
                     <td>
                         <router-link v-bind:to="{name: 'student.show', params: {studentId: student.id}}">
@@ -66,7 +64,9 @@
                     sheet_id: '',
                     user_id: ''
                 },
-                records: []
+                records: [],
+                loginUser: null,
+                student: []
             }
         },
         methods: {
@@ -76,6 +76,12 @@
                         this.students = res.data;
                 });
             },
+            getLoginUser() {
+                axios.get('/api/users/login')
+                    .then((res) => {
+                        this.loginUser = res.data
+                    })
+            },
             // getRecords() {
             //     axios.get('/api/students')
             //         .then((res) => {
@@ -83,16 +89,28 @@
             //     });
             // },
             deleteStudent(id) {
-                axios.delete('/api/students/' + id)
+                axios.get('/api/students/' + id)
                     .then((res) => {
-                        this.getStudents();
-                    }) 
+                        this.student = res.data
+                        if (this.loginUser == this.student.user_id) {
+                            if (confirm('本当に削除しますか？')) {
+                                axios.delete('/api/students/' + id, {data: this.student})
+                                    .then((res) => {
+                                        this.getStudents().catch(err => {});
+                                        //this.$router.push({name:'student.list'}).catch(err => {})
+                                    })
+                            }
+                        } else {
+                            alert("権限がありません")
+                        }
+                    })
             }
             
         },
         mounted() {
             this.getStudents();
             //this.getRecords();
+            this.getLoginUser();
         }
         
     }

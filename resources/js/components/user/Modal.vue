@@ -1,18 +1,24 @@
 <template>
-    <div id="app">
-        <div id="overlay">
+    
+    <div id="overlay">
             <div id="modal">
-                <p>これがモーダルウィンドウです</p>
+                <p>{{ info.event.title }}さんとの面談</p>
+                <p>{{ info.event.start | today }}</p>
                 <p><button v-on:click="clickEvent">close</button></p>
             </div>
         </div>
-    </div>
-    
     
 </template>
 
 <script>
     export default {
+        props: {
+            info: {
+                type: Object,
+                require: false,
+                
+            }
+        },
         methods: {
             clickEvent() {
                 this.$emit('from-child')

@@ -23,7 +23,7 @@ class CreateRecordsTable extends Migration
             $table->timestamps();
             $table->dateTime('deleted_at', 0)->nullable();
             
-            $table->foreign('student_id')->references('id')->on('students');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
         });
     }
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Gate;
 
 use App\Student;
 use App\Grade;
@@ -155,11 +156,15 @@ class StudentController extends Controller {
 	
 	//生徒編集登録
 	public function update(Student $student, Request $request)	{
+	    if (Gate::allows('editStudent', $student)){
         $data = $request->all();
         $student->fill($data);
         $student->save();
         return $student;
     	//return redirect('/students/' . $student->id);
+	    } else {
+	        echo ("403 unauthorized");
+	    }
 	}
 	
 	//生徒情報削除
@@ -241,13 +246,16 @@ class StudentController extends Controller {
 	
 	//入学年月を選択肢として送る
 	public function enter(Student $student) {
-	    $enter = $student->get('enter')->unique('enter');
+	    $enter = array_merge($student->get('enter')->unique('enter')->sortBy('enter')->toArray());
 	    return $enter;
 	}
 	
 	//入学年月で生徒を絞り込む
 	public function select($enter) {
-	    $students = Student::query()->where('enter', '=', $enter)->get();
+	    $students = Student::query()
+	                ->where('enter', '=', $enter)
+	                ->where('user_id', '=', Auth::id())
+	                ->get();
 	    return $students;
 	}
 	

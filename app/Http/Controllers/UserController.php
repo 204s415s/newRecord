@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\User;
 use App\GoogleSheet;
@@ -23,6 +24,10 @@ class UserController extends Controller
     //     $values = $response->getValues();
     //     dd($values);
     // }
+    
+    public function nowUser() {
+        return Auth::id();
+    }
     
     
 }

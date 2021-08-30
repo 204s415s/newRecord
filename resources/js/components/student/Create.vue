@@ -1,22 +1,31 @@
 <template>
-    <div class="container">
+    <div class="container-fluid">
         <div class="content">
         <div class="row justify-content-center">
-            <div class="top">
+            <div class="col-sm-8">
                 <form v-on:submit.prevent="submit">
                     
                     
-                    <div class="form-group row">
-                        <label for="enter" class="col-sm-3 col-form-label">入学年月日</label>
-                        <input type="date" class="col-sm-9 form-control" id="enter" placeholder="19900401" v-model="newStudent.enter">
+                    <div class="form-group row" v-model="newStudent.enter">
+                        <label for="enter" class="col-md-3 col-form-label">入学年月</label>
+                        <select class="col-md-4 form-control" id="year" v-model="year">
+                            <option v-for="year in optionYear" v-bind:value="year.value">
+                                {{ year.value }}
+                            </option>
+                        </select><p class="col-md-1">年</p>
+                        <select class="col-md-3 form-control" id="month" v-model="month">
+                            <option v-for="month in optionMonth" v-bind:value="month.value">
+                                {{ month.value }}
+                            </option>
+                        </select><p class="col-md-1">月</p>
                     </div>
                     <div class="form-group row">
-                        <label for="name" class="col-sm-3 col-form-label">名前</label>
-                        <input type="text" class="col-sm-9 form-control" id="name" v-model="newStudent.student_name">
+                        <label for="name" class="col-md-3 col-form-label">名前</label>
+                        <input type="text" class="col-md-9 form-control" id="name" v-model="newStudent.student_name">
                     </div>
                     <div class="form-group row">
-                        <label for="grade_id" class="col-sm-3 col-form-label">学年</label>
-                        <select v-model="newStudent.grade" class="col-sm-9 form-control">
+                        <label for="grade_id" class="col-md-3 col-form-label">学年</label>
+                        <select v-model="newStudent.grade" class="col-md-9 form-control">
                             <option disabled value="">選択してください</option>
                             <option v-for="grade in grades" v-bind:value="grade.value" >
                                 {{ grade.value }}
@@ -24,32 +33,32 @@
                         </select>
                     </div>
                     <div class="form-group row">
-                        <label for="experience" class="col-sm-3 col-form-label">プログラミング経験</label>
-                        <select v-model="newStudent.experience" class="col-sm-9 form-control">
+                        <label for="experience" class="col-md-3 col-form-label">プログラミング経験</label>
+                        <select v-model="newStudent.experience" class="col-md-9 form-control">
                             <option v-for="experience in optionExperiences" v-bind:value="experience.name">
                                 {{ experience.name }}
                             </option>
                         </select>
                     </div>
                     <div class="form-group row">
-                        <label for="description" class="col-sm-3 col-form-label">めも</label>
-                        <textarea class="col-sm-9 form-control" id="description" v-model="newStudent.description"></textarea>
+                        <label for="description" class="col-md-3 col-form-label">めも</label>
+                        <textarea class="col-md-9 form-control" id="description" v-model="newStudent.description"></textarea>
                     </div>
                     <div class="form-group row">
-                        <label for="sheet_id" class="col-sm-3 col-form-label">スプレッドシートID</label>
-                        <input type="text" class="col-sm-9 form-control" id="sheet_id" v-model="newStudent.sheet_id">
+                        <label for="sheet_id" class="col-md-3 col-form-label">スプレッドシートID</label>
+                        <input type="text" class="col-md-9 form-control" id="sheet_id" v-model="newStudent.sheet_id">
                     </div>
                     <div class="form-group row">
-                        <label for="mentor" class="col-sm-3 col-form-label">担当</label>
-                        <select v-model="newStudent.user_id" class="col-sm-9 form-control">
+                        <label for="mentor" class="col-md-3 col-form-label">担当</label>
+                        <select v-model="newStudent.user_id" class="col-md-9 form-control">
                             <option disabled value="">選択してください</option>
                             <option v-for="user in users" v-bind:value="user.id" >
                                 {{ user.name }}
                             </option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-orange mb-5" v-if="clear">Submit</button>
-                    <button v-else type="button" class="btn btn-secondary mb-5" disabled>Submit</button>
+                    <button type="submit" class="btn btn-orange mb-5" v-if="clear">登録</button>
+                    <button v-else type="button" class="btn btn-secondary mb-5" disabled>記入漏れがあります</button>
                 </form>
             </div>
             </div>
@@ -74,9 +83,29 @@
                     sheet_id: '',
                     user_id: '',
                 },
+                year: null,
+                month: null,
                 optionExperiences:[
                     {id: 1, name:'無'},
                     {id: 2, name:'有'}
+                ],
+                optionYear:[
+                    {id: 1, value:'2021'},
+                    {id: 2, value:'2022'}
+                ],
+                optionMonth:[
+                    {id: 1, value:'01'},
+                    {id: 2, value:'02'},
+                    {id: 3, value:'03'},
+                    {id: 4, value:'04'},
+                    {id: 5, value:'05'},
+                    {id: 6, value:'06'},
+                    {id: 7, value:'07'},
+                    {id: 8, value:'08'},
+                    {id: 9, value:'09'},
+                    {id: 10, value:'10'},
+                    {id: 11, value:'11'},
+                    {id: 12, value:'12'}
                 ],
                 clear: false
             }
@@ -87,6 +116,12 @@
                     this.checkForm()
                 },
                 deep: true
+            },
+            year() {
+                this.enterSet()
+            },
+            month() {
+                this.enterSet()
             }
         },
         methods: {
@@ -97,6 +132,10 @@
                 } else {
                     return this.clear = false;
                 }
+            },
+            enterSet() {
+                this.newStudent.enter = this.year + '-' + this.month + '-01';
+                return this.newStudent.enter;
             },
             selectMentors() {
                 axios.get('/api/users')

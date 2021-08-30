@@ -10,7 +10,7 @@
                     </div>
                     <div class="form-group row">
                         <label for="enter" class="col-sm-3 col-form-label">入学年月日</label>
-                        <input type="text" class="col-sm-9 form-control" id="enter" placeholder="19900401" v-model="student.enter">
+                        <input type="text" class="col-sm-9 form-control" id="enter" v-model="student.enter">
                     </div>
                     <div class="form-group row">
                         <label for="grade" class="col-sm-3 col-form-label">学年</label>
@@ -45,7 +45,7 @@
                             </option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-an">更新</button>
+                    <button type="submit" class="btn btn-an mb-5">更新</button>
                 </form>
             </div>
             </div>
@@ -88,7 +88,7 @@
             editStudent() {
                 axios.put('/api/students/' + this.studentId, this.student)
                     .then((res) => {
-                        this.$router.push({name: 'student.list'})
+                        this.$router.push({name: 'student.show', params: {studentId: this.student.id}});
                             console.log("更新");
                     })
                     .catch(err => {

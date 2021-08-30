@@ -12,8 +12,9 @@
                 <calendar></calendar>
             </div>
             
-            <button v-on:click="openModal()">click</button>
-            <modal v-show="showContent" v-on:from-child="closeModal()"></modal>
+            
+            
+            
         </div>
         </div>
         
