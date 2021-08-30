@@ -24,10 +24,11 @@ class CreateProjectsTable extends Migration
             // $table->date('nextdate');
             // $table->time('nexttime');
             $table->string('style', 10);
+            $table->date('recorded_at');
             $table->timestamps();
             $table->dateTime('deleted_at', 0)->nullable();
             
-            $table->foreign('student_id')->references('id')->on('students');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
         });
     }
 

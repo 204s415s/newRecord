@@ -21,7 +21,7 @@ export default new VueRouter({
     mode: 'history',
     routes: [
         {
-            path: '/index',
+            path: '/',
             name: 'index',
             component: Index
         },

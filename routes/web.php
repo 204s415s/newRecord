@@ -26,6 +26,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 |-----------------------
 */
 Route::get('/api/users', 'UserController@index');
+Route::get('/api/users/login', 'UserController@nowUser');
+
 Route::get('/api/students', 'StudentController@index');
 Route::get('/api/students/clear', 'StudentController@clear');
 Route::get('/api/students/enter', 'StudentController@enter');
@@ -49,6 +51,8 @@ Route::get('/api/record/project', 'ProjectController@index');
 Route::post('/api/record/project', 'ProjectController@store');
 
 Route::get('/api/{enter}', 'StudentController@select');
+
+
 
 
 /*

@@ -19,8 +19,8 @@ class CreateCurriculumRecordsTable extends Migration
             $table->timestamps();
             $table->dateTime('deleted_at', 0)->nullable();
             
-            $table->foreign('curriculum_id')->references('id')->on('curricula');
-            $table->foreign('record_id')->references('id')->on('records');
+            $table->foreign('curriculum_id')->references('id')->on('curricula')->onDelete('cascade');
+            $table->foreign('record_id')->references('id')->on('records')->onDelete('cascade');
         });
     }
 

@@ -2,8 +2,13 @@
     <div id="app">
         <div class="todaybox">
             <p class="todaybox-title">本日の予定</p>
-            <div v-for="today in todays">
-                <p class="mt-2 ml-1">{{ today.next | today }}　{{ today.student.student_name }}さん ({{ today.style }})</p>
+            <div v-if="todays.length != 0">
+                <div v-for="today in todays">
+                    <p class="mt-2 ml-1">{{ today.next | today }}　{{ today.student.student_name }}さん ({{ today.style }})</p>
+                </div>
+            </div>
+            <div v-else>
+                <p class="mt-2 ml-1">本日の予定はありません</p>
             </div>
         </div>
     </div>
@@ -49,11 +54,8 @@
             getTodays() {
                 axios.get('/api/mypage/today')
                     .then((res) => {
-                        if(Object.keys(res.data).length > 0) {
-                            this.todays = res.data
-                        } else {
-                            this.todays = "本日の予定はありません"
-                        }
+                        this.todays = res.data
+                        console.log(res.data)
                     })
             },
         },

@@ -17,7 +17,7 @@
                             </option>
                         </select>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row" v-if="selectedEnter !== ''" >
                         <label for="name" class="col-sm-3 col-form-label">名前：</label>
                         <select v-model="newCurriculum.student_id" class="col-sm-9 form-control">
                             <option disabled value="">選択してください</option>
@@ -37,7 +37,8 @@
                     </div>
                     <div class="form-group row">
                         <label for="question" class="col-sm-3 col-form-label">質問：</label>
-                        <textarea v-model="newCurriculum.question" class="col-sm-9 form-control" id="question"></textarea>
+                        <textarea v-model="newCurriculum.question" class="col-sm-9 form-control" id="question"
+                            :style="styles" ref="area"></textarea>
                     </div>
                     <div class="form-group row">
                         <label for="aim" class="col-sm-3 col-form-label">目標：</label>
@@ -54,15 +55,14 @@
                             <input type="time" class="col-sm-4 form-control" id="time" v-model="time">
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">形式：</label>
-                        <label v-for="style in optionStyles" class="col-sm-3 form-control" for="style.id">
-                            
-                            <input type="radio" id="style.id" v-model="newCurriculum.style" :value="style.value" />
+                        <label for="style" class="col-sm-3 col-form-label">形式：</label>
+                        <label v-for="style in optionStyles" class="col-sm-3 form-control">
+                            <input type="radio" v-model="newCurriculum.style" :value="style.value" />
                             {{ style.value }}
-                           
                         </label>
                     </div>
-                     <button type="submit" class="btn btn-an mb-5">保存</button>
+                    <button type="submit" class="btn btn-orange mb-5" v-if="clear">記録</button>
+                    <button v-else type="button" class="btn btn-secondary mb-5" disabled>記入漏れがあります</button>
                  </form>   
             </div>       
             </div>
@@ -100,6 +100,8 @@
                     { id: 1, value: '対面' },
                     { id: 2, value: 'オンライン' }
                 ],
+                clear: false,
+                height: "60px"
             }
         },
         watch: {
@@ -112,16 +114,34 @@
             },
             time() {
                 this.dateset()
+            },
+            newCurriculum: {
+                handler: function(newValue, oldValue) {
+                    this.checkForm()
+                },
+                deep: true
+            },
+            'newCurriculum.question'() {
+                this.resize();
             }
         },
         computed: {
-            
-            
+            styles() {
+                return {
+                    "height": this.height
+                }
+            }
         },
         methods: {
             dateset() {
                 this.newCurriculum.next = this.date + ' ' + this.time;
                 return this.newCurriculum.next
+            },
+            resize() {
+                this.height = "auto";
+                this.$nextTick(() => {
+                    this.height = this.$refs.area.scrollHeight + 'px';
+                })
             },
             sentDatas() {
                 axios.get('/api/students/' + this.studentId)
@@ -136,23 +156,35 @@
                         this.enter = res.data;
                     })
             },
-            selectStudents: function() {
+            selectStudents() {
                 axios.get('/api/' + this.selectedEnter)
                     .then((res) => {
                         this.students = res.data;
                     });
             },
+            checkForm() {
+                if (this.newCurriculum.student_id !== '' && this.newCurriculum.progress !== '' && this.newCurriculum.aim !== ''
+                && this.newCurriculum.style !== '' && this.newCurriculum.recorded_at !== '' ) {
+                    return this.clear = true;
+                } else {
+                    return this.clear = false;
+                }
+            },
             submit() {
                 axios.post('/api/record/curriculum', this.newCurriculum)
                     .then((res) => {
                         //this.newCurriculum.next = this.date + this.time    
-                        this.$router.push({name: 'student.show'});
+                        this.$router.push({name: 'student.show', params: {studentId: this.newCurriculum.student_id}});
                  });
             }
         },
         mounted() {
+            this.resize();
+            this.checkForm();
             this.selectEnter();
             this.selectStudents();
+            //this.sentDatas();
+            
         }
         
     };

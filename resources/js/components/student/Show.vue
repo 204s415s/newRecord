@@ -5,8 +5,10 @@
             <div class="col-md-5 px-1">
                 <td>
                     <router-link v-bind:to="{name: 'student.edit', params: {studentId: student.id}}">
-                        <button class="btn btn-orange">編集</button>
+                        <button v-if="loginUser == student.user_id" class="btn btn-orange">編集</button>
+                        <button v-else type="button" class="btn btn-secondary" disabled>編集</button>
                     </router-link>
+                
                     <router-link v-bind:to="{name: 'student.list'}">
                         <button class="btn btn-orange">戻る</button>
                     </router-link>
@@ -41,7 +43,7 @@
                     </div>
                 </form>
                 </div>
-                <div class="com-8 px-1">
+                <div class="com-8 pb-1">
                     <LineChart v-if="loaded" :chartData="chartdata" :options="options"></LineChart>
                     <button class="btn btn-orange" @click="getData()">更新</button>
                 </div>
@@ -91,6 +93,7 @@
                 student: {},
                 description: [],
                 records: [],
+                loginUser: null,
                 
                 loaded: false,
                 chartdata: null,
@@ -115,6 +118,12 @@
                         this.student = res.data;
                     });
             },
+            getLoginUser() {
+                axios.get('/api/users/login')
+                    .then((res) => {
+                        this.loginUser = res.data;
+                    })
+            },
             getRecord() {
                 axios.get('/api/students/' + this.studentId + '/record')
                     .then((res) => {
@@ -137,12 +146,15 @@
                         }
                     })
             },
+            
         },
         mounted() {
+            this.getLoginUser();
             this.loaded = true;
             this.getStudent();
             this.getRecord();
             this.getData()
+            
         }
     }
 </script>

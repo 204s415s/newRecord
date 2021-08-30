@@ -2,7 +2,7 @@
     
     <div id="overlay">
             <div id="modal">
-                <p>{{ info.event.title }}さん</p>
+                <p>{{ info.event.title }}さんとの面談</p>
                 <p>{{ info.event.start | today }}</p>
                 <p><button v-on:click="clickEvent">close</button></p>
             </div>
