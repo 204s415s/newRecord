@@ -23,9 +23,11 @@ import Header from './components/Header';
 import router from './plugins/router';
 import filter from './plugins/filter';
 import grades from './datas/grade.json';
+import VueTextareaAutosize from 'vue-textarea-autosize'
 
 Vue.use(filter);
 //Vue.use(grades)
+Vue.use(VueTextareaAutosize);
 
 Vue.component('header-component', Header);
 

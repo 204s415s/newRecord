@@ -107,26 +107,37 @@
 
 #overlay {
     /*　要素を重ねた時の順番　*/
-  z-index:1;
+    z-index:1;
 
   /*　画面全体を覆う設定　*/
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background-color:rgba(0,0,0,0.5);
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:rgba(0,0,0,0.5);
 
   /*　画面の中央に要素を表示させる設定　*/
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #modal {
-  z-index:2;
-  width:50%;
-  padding: 1em;
-  background:#fff;
+    z-index:2;
+    width:50%;
+    padding: 1em;
+    background:#fff;
 }
+
+.require {
+    display : inline-block;
+    padding: 3.5px;
+    margin-left: 5px;
+    vertical-align: 10%;
+    font-size: 10px;
+    background: #e98035;
+    color: #fff;
+    border-radius: 3px 3px 3px 3px;
+}
+    
