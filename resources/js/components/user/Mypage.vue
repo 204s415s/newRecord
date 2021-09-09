@@ -18,7 +18,10 @@
         </div>
         </div>
         
-        
+    <div>
+    <a class="btn btn-light" @close="modal=false" tabindex="">open</a>
+  </div>
+  <testmodal v-if="modal" @close="modal=false"/>
         
     </div>
 </template>
@@ -28,12 +31,14 @@
     import calendar from './Calendar'
     import today from './Today'
     import modal from './Modal'
+    import testmodal from './Testmodal'
     export default {
         components: {
             students,
             calendar,
             today,
-            modal
+            modal,
+            testmodal
         },
         data: function() {
             return {
