@@ -24,7 +24,7 @@ class StudentController extends Controller {
     public function index(Student $student, Curriculum_record $curriculum_record, Project_record $project_record) {
     
         $students = Student::with('user')->get(); //リレーション関係にあるものも一緒に渡す
-        
+        //dd($students->sortBy('enter'));
         // //最新の進捗出したいやつ
         // //$studentsはコレクション！		  
         //$students = $student->get();

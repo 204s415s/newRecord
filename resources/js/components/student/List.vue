@@ -13,19 +13,20 @@
             </router-link>
         </div>
         
+        <div class="row">
         <table class="table table-bordered">
             <thead class="thead" >
             <tr>
-                <th scope="col">入学年月</th>
-                <th scope="col">名前</th>
-                <th scope="col">学年</th>
-                <th scope="col">担当メンター</th>
-                <th scope="col">詳細</th>
-                <th scope="col">削除</th>
+                <th class="col-md-2" @click="sortBy('enter')" :class="addClass('enter')">入学年月</th>
+                <th class="col-md-2" @click="sortBy('student_name')" :class="addClass('student_name')">名前</th>
+                <th class="col-md-2" @click="sortBy('grade')" :class="addClass('grade')">学年</th>
+                <th class="col-md-2" @click="sortBy('user_id')"  :class="addClass('user_id')">担当メンター</th>
+                <th class="col-md-2">詳細</th>
+                <th class="col-md-2">削除</th>
             </tr>
             </thead>
             <tbody>
-                <tr v-for="student in students">
+                <tr v-for="student in sortStudents">
                     <td scope="row">{{ student.enter | enter}}</td>
                     <td>{{ student.student_name }}</td>
                     <td>{{ student.grade }}</td>
@@ -42,8 +43,19 @@
             </tbody>
         </table>
         </div>
+        
+        </div>
     </div>
 </template>
+
+<style>
+    .asc::after {
+        content: " ↑昇順";
+    }
+    .desc::after {
+        content: " ↓降順";
+    }
+</style>
 
 <script>
     export default {
@@ -66,14 +78,39 @@
                 },
                 records: [],
                 loginUser: null,
-                student: []
+                student: [],
+                sort_key: "",
+                sort_asc: true,
             }
+        },
+        computed: {
+            sortStudents() {
+                if (this.sort_key != "") {
+                    let set = 1;
+                    this.sort_asc ? (set = 1) : (set = -1);
+                    this.students.sort((a, b) => {
+                        if (a[this.sort_key] < b[this.sort_key]) return -1 * set;
+                        if (a[this.sort_key] > b[this.sort_key]) return 1 * set;
+                        return 0;
+                    });
+                    return this.students;
+                    } else {
+                        return this.students;
+                    }
+            },
         },
         methods: {
             getStudents() {
                 axios.get('/api/students')
                     .then((res) => {
-                        this.students = res.data;
+                        this.students = res.data
+                //         .sort((a, b) => {
+                //         if (a[enter] < b[enter]) return -1;
+                //         if (a[enter] > b[enter]) return 1;
+                //         return 0;
+                //     });
+                //     return this.students;
+                
                 });
             },
             getLoginUser() {
@@ -81,6 +118,18 @@
                     .then((res) => {
                         this.loginUser = res.data
                     })
+            },
+            sortBy(key) {
+                this.sort_key === key
+                ? (this.sort_asc =! this.sort_asc)
+                : (this.sort_asc = true);
+                this.sort_key = key;
+            },
+            addClass(key) {
+                return {
+                asc: this.sort_key === key && this.sort_asc,
+                desc: this.sort_key === key && !this.sort_asc,
+                };
             },
             // getRecords() {
             //     axios.get('/api/students')
