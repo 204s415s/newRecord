@@ -3,6 +3,18 @@
         <div class="content">
         <div class="row justify-content-center">
             <div class="col-sm-10">
+            
+            <div v-for="record in records">
+                <div class="box shadow-none">
+                    <span class="box-title">{{ record.recorded_at | record }}</span>
+                    <p>進捗： {{ record.progress }}</p>
+                    <p v-if="record.topical != null">特筆事項： {{ record.topical }}</p>
+                    <p v-else> </p>
+                    <p class="white-space">質問： {{ record.question }}</p>
+                    <p>目標： {{ record.aim }}</p>
+                </div>
+            </div>
+            
                 <form v-on:submit.prevent="submit">
                     <div class="form-group row">
                         <label for="recorded_at" class="col-sm-3 col-form-label">記録日<span class="require">必須</span></label>
@@ -62,12 +74,41 @@
                     </div>
                     <button type="submit" class="btn btn-orange mb-5" v-if="clear">記録</button>
                     <button v-else type="button" class="btn btn-secondary mb-5" disabled>記入漏れがあります</button>
-                 </form>   
+                </form>
+                 
+                
             </div>       
             </div>
         </div>
     </div>
 </template>
+
+<style scoped>
+.box {
+    position: relative;
+    margin: 2em 0;
+    padding: 0.5em 1em;
+    border: solid 2px #00afcc;
+    border-radius: 8px;
+    background-color: transparent;
+}
+.box-title {
+    position: absolute;
+    display: inline-block;
+    top: -13px;
+    left: 10px;
+    padding: 0 5px;
+    line-height: 1;
+    font-size: 19px;
+    background: #ffffff; /*containerの背景色*/
+    color: #00afcc;
+    font-weight: bold;
+}
+.box p {
+    margin: 0; 
+    padding: 0;
+}
+</style>
 
 <script>
     import sections from '../../datas/section.json';
@@ -100,7 +141,8 @@
                     { id: 2, value: 'オンライン' }
                 ],
                 clear: false,
-                height: "60px"
+                height: "60px",
+                records: []
             }
         },
         watch: {
@@ -119,6 +161,9 @@
                     this.checkForm()
                 },
                 deep: true
+            },
+            'newCurriculum.student_id': function(newValue, oldValue) {
+                this.showRecords();
             }
         },
         methods: {
@@ -144,6 +189,12 @@
                     .then((res) => {
                         this.students = res.data;
                     });
+            },
+            showRecords() {
+                axios.get('/api/students/' + this.newCurriculum.student_id + '/record')
+                    .then((res) => {
+                        this.records = res.data;
+                    })
             },
             checkForm() {
                 if (this.newCurriculum.student_id !== '' && this.newCurriculum.progress !== ''

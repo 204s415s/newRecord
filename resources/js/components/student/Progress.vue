@@ -7,13 +7,13 @@
             <table class="table table-bordered">
                 <thead class="font-weight-normal">
                 <tr class="small" scope="col">
-                    <th>入学年月</th>
-                    <th>氏名</th>
-                    <th>担当</th>
+                    <th @click="sortBy('enter')" :class="addClass('enter')">入学年月</th>
+                    <th @click="sortBy('student_name')" :class="addClass('student_name')">氏名</th>
+                    <th @click="sortBy('user_id')" :class="addClass('user_id')">担当</th>
                 </tr>
                 </thead>
                 <tbody>
-                    <tr class="cell" v-for="student in students">
+                    <tr class="cell" v-for="student in sortStudents">
                         <td>{{ student.enter | enter }}</td>
                         <td>{{ student.student_name }}</td>
                         <td>{{ student.user.name }}</td>
@@ -75,8 +75,26 @@
                 datas: {
                     student:{},
                     clear:{}
-                }
+                },
+                sort_key: "",
+                sort_asc: true,
             }
+        },
+        computed: {
+            sortStudents() {
+                if (this.sort_key != "") {
+                    let set = 1;
+                    this.sort_asc ? (set = 1) : (set = -1);
+                    this.students.sort((a, b) => {
+                        if (a[this.sort_key] < b[this.sort_key]) return -1 * set;
+                        if (a[this.sort_key] > b[this.sort_key]) return 1 * set;
+                        return 0;
+                    });
+                    return this.students;
+                    } else {
+                        return this.students;
+                    }
+            },
         },
         methods: {
             getSection() {
@@ -107,9 +125,18 @@
             //             console.log()
             //         })
             // },
-            combine() {
-                
-            }
+            sortBy(key) {
+                this.sort_key === key
+                ? (this.sort_asc =! this.sort_asc)
+                : (this.sort_asc = true);
+                this.sort_key = key;
+            },
+            addClass(key) {
+                return {
+                asc: this.sort_key === key && this.sort_asc,
+                desc: this.sort_key === key && !this.sort_asc,
+                };
+            },
         },
         created() {
             this.getSection(),
