@@ -208,7 +208,7 @@
                 axios.post('/api/record/curriculum', this.newCurriculum)
                     .then((res) => {
                         //this.newCurriculum.next = this.date + this.time  
-                        console.log(res.data);
+                        console.log(this.newCurriculum);
                         this.$router.push({name: 'student.show', params: {studentId: this.newCurriculum.student_id}});
                  });
             }

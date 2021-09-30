@@ -17868,7 +17868,7 @@ var _datas_section_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__
 
       axios.post('/api/record/curriculum', this.newCurriculum).then(function (res) {
         //this.newCurriculum.next = this.date + this.time  
-        console.log(res.data);
+        console.log(_this4.newCurriculum);
 
         _this4.$router.push({
           name: 'student.show',
