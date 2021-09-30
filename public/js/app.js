@@ -17862,6 +17862,8 @@ var _datas_section_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__
       } else {
         return this.clear = false;
       }
+
+      console.log(this.newCurriculum);
     },
     submit: function submit() {
       var _this4 = this;

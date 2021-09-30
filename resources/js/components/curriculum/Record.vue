@@ -203,6 +203,7 @@
                 } else {
                     return this.clear = false;
                 }
+                console.log(this.newCurriculum);
             },
             submit() {
                 axios.post('/api/record/curriculum', this.newCurriculum)
