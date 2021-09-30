@@ -68,7 +68,7 @@ class StudentController extends Controller {
         //         //print_r($return);
         //         //$return = $return->concat((collect($student)));
         //     }
-        }
+        //}
         //dd($students);
         return $students;
     }
