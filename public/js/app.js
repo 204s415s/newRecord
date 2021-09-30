@@ -94292,14 +94292,7 @@ var render = function() {
                   }
                 },
                 [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-md-3 col-form-label",
-                      attrs: { for: "enter" }
-                    },
-                    [_vm._v("入学年月必須")]
-                  ),
+                  _vm._m(0),
                   _vm._v(" "),
                   _c(
                     "select",
@@ -94392,7 +94385,7 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _vm._m(0),
+                _vm._m(1),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -94422,7 +94415,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _vm._m(1),
+                _vm._m(2),
                 _vm._v(" "),
                 _c(
                   "select",
@@ -94480,7 +94473,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _vm._m(2),
+                _vm._m(3),
                 _vm._v(" "),
                 _c(
                   "select",
@@ -94602,7 +94595,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _vm._m(3),
+                _vm._m(4),
                 _vm._v(" "),
                 _c(
                   "select",
@@ -94680,6 +94673,19 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-md-3 col-form-label", attrs: { for: "enter" } },
+      [
+        _vm._v("入学年月"),
+        _c("span", { staticClass: "require" }, [_vm._v("必須")])
+      ]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

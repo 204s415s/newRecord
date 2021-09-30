@@ -5,7 +5,7 @@
             <div class="col-sm-10">
                 <form v-on:submit.prevent="submit">
                     <div class="form-group row" v-model="newStudent.enter">
-                        <label for="enter" class="col-md-3 col-form-label">入学年月必須</label>
+                        <label for="enter" class="col-md-3 col-form-label">入学年月<span class="require">必須</span></label>
                         <select class="col-md-4 form-control" id="year" v-model="year">
                             <option v-for="year in optionYear" v-bind:value="year.value">
                                 {{ year.value }}
