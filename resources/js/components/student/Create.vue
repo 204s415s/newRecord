@@ -65,6 +65,19 @@
         </div>
     </div>
 </template>
+
+<style>
+    .require {
+    display : inline-block;
+    padding: 3.5px;
+    margin-left: 5px;
+    vertical-align: 10%;
+    font-size: 10px;
+    background: #e98035;
+    color: #fff;
+    border-radius: 3px 3px 3px 3px;
+}
+</style>
  
 <script>
     import grades from '../../datas/grade.json';
