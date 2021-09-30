@@ -171,13 +171,13 @@
                 this.newCurriculum.next = this.date + ' ' + this.time;
                 return this.newCurriculum.next
             },
-            sentDatas() {
-                axios.get('/api/students/' + this.studentId)
-                    .then((res) => {
-                        this.sentStudent = res.data;
-                        console.log(res.data)
-                    })
-            },
+            // sentDatas() {
+            //     axios.get('/api/students' + this.studentId)
+            //         .then((res) => {
+            //             this.sentStudent = res.data;
+            //             console.log(res.data)
+            //         })
+            // },
             selectEnter() {
                 axios.get('/api/students/enter')
                     .then((res) => {
