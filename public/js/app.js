@@ -94232,14 +94232,7 @@ var render = function() {
                   }
                 },
                 [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-md-3 col-form-label",
-                      attrs: { for: "enter" }
-                    },
-                    [_vm._v("入学年月")]
-                  ),
+                  _vm._m(0),
                   _vm._v(" "),
                   _c(
                     "select",
@@ -94332,14 +94325,7 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-3 col-form-label",
-                    attrs: { for: "name" }
-                  },
-                  [_vm._v("名前")]
-                ),
+                _vm._m(1),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -94369,14 +94355,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-3 col-form-label",
-                    attrs: { for: "grade_id" }
-                  },
-                  [_vm._v("学年")]
-                ),
+                _vm._m(2),
                 _vm._v(" "),
                 _c(
                   "select",
@@ -94434,14 +94413,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-3 col-form-label",
-                    attrs: { for: "experience" }
-                  },
-                  [_vm._v("プログラミング経験")]
-                ),
+                _vm._m(3),
                 _vm._v(" "),
                 _c(
                   "select",
@@ -94563,14 +94535,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-3 col-form-label",
-                    attrs: { for: "mentor" }
-                  },
-                  [_vm._v("担当")]
-                ),
+                _vm._m(4),
                 _vm._v(" "),
                 _c(
                   "select",
@@ -94647,7 +94612,64 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-md-3 col-form-label", attrs: { for: "enter" } },
+      [
+        _vm._v("入学年月"),
+        _c("span", { staticClass: "require" }, [_vm._v("必須")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-md-3 col-form-label", attrs: { for: "name" } },
+      [_vm._v("名前"), _c("span", { staticClass: "require" }, [_vm._v("必須")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-md-3 col-form-label", attrs: { for: "grade_id" } },
+      [_vm._v("学年"), _c("span", { staticClass: "require" }, [_vm._v("必須")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-md-3 col-form-label", attrs: { for: "experience" } },
+      [
+        _vm._v("プログラミング経験"),
+        _c("span", { staticClass: "require" }, [_vm._v("必須")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-md-3 col-form-label", attrs: { for: "mentor" } },
+      [_vm._v("担当"), _c("span", { staticClass: "require" }, [_vm._v("必須")])]
+    )
+  }
+]
 render._withStripped = true
 
 

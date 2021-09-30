@@ -7,7 +7,7 @@
                     
                     
                     <div class="form-group row" v-model="newStudent.enter">
-                        <label for="enter" class="col-md-3 col-form-label">入学年月</label>
+                        <label for="enter" class="col-md-3 col-form-label">入学年月<span class="require">必須</span></label>
                         <select class="col-md-4 form-control" id="year" v-model="year">
                             <option v-for="year in optionYear" v-bind:value="year.value">
                                 {{ year.value }}
@@ -20,11 +20,11 @@
                         </select><p class="col-md-1">月</p>
                     </div>
                     <div class="form-group row">
-                        <label for="name" class="col-md-3 col-form-label">名前</label>
+                        <label for="name" class="col-md-3 col-form-label">名前<span class="require">必須</span></label>
                         <input type="text" class="col-md-9 form-control" id="name" v-model="newStudent.student_name">
                     </div>
                     <div class="form-group row">
-                        <label for="grade_id" class="col-md-3 col-form-label">学年</label>
+                        <label for="grade_id" class="col-md-3 col-form-label">学年<span class="require">必須</span></label>
                         <select v-model="newStudent.grade" class="col-md-9 form-control">
                             <option disabled value="">選択してください</option>
                             <option v-for="grade in grades" v-bind:value="grade.value" >
@@ -33,7 +33,7 @@
                         </select>
                     </div>
                     <div class="form-group row">
-                        <label for="experience" class="col-md-3 col-form-label">プログラミング経験</label>
+                        <label for="experience" class="col-md-3 col-form-label">プログラミング経験<span class="require">必須</span></label>
                         <select v-model="newStudent.experience" class="col-md-9 form-control">
                             <option v-for="experience in optionExperiences" v-bind:value="experience.name">
                                 {{ experience.name }}
@@ -49,7 +49,7 @@
                         <input type="text" class="col-md-9 form-control" id="sheet_id" v-model="newStudent.sheet_id">
                     </div>
                     <div class="form-group row">
-                        <label for="mentor" class="col-md-3 col-form-label">担当</label>
+                        <label for="mentor" class="col-md-3 col-form-label">担当<span class="require">必須</span></label>
                         <select v-model="newStudent.user_id" class="col-md-9 form-control">
                             <option disabled value="">選択してください</option>
                             <option v-for="user in users" v-bind:value="user.id" >
