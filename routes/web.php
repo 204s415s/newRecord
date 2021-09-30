@@ -52,9 +52,6 @@ Route::post('/api/record/project', 'ProjectController@store');
 
 Route::get('/api/{enter}', 'StudentController@select');
 
-
-
-
 /*
 |-----------------------
 |   すべてのルートでapp.blade.phpを表示する
