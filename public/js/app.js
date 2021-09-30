@@ -18152,8 +18152,6 @@ var _datas_grade_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__we
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -94269,7 +94267,7 @@ var render = function() {
   return _c("div", { staticClass: "container-fluid" }, [
     _c("div", { staticClass: "content" }, [
       _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-sm-8" }, [
+        _c("div", { staticClass: "col-sm-10" }, [
           _c(
             "form",
             {
@@ -94294,7 +94292,14 @@ var render = function() {
                   }
                 },
                 [
-                  _vm._m(0),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-3 col-form-label",
+                      attrs: { for: "enter" }
+                    },
+                    [_vm._v("入学年月必須")]
+                  ),
                   _vm._v(" "),
                   _c(
                     "select",
@@ -94387,7 +94392,7 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _vm._m(1),
+                _vm._m(0),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -94417,7 +94422,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _vm._m(2),
+                _vm._m(1),
                 _vm._v(" "),
                 _c(
                   "select",
@@ -94475,7 +94480,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _vm._m(3),
+                _vm._m(2),
                 _vm._v(" "),
                 _c(
                   "select",
@@ -94597,7 +94602,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _vm._m(4),
+                _vm._m(3),
                 _vm._v(" "),
                 _c(
                   "select",
@@ -94675,19 +94680,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-md-3 col-form-label", attrs: { for: "enter" } },
-      [
-        _vm._v("入学年月"),
-        _c("span", { staticClass: "require" }, [_vm._v("必須")])
-      ]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
