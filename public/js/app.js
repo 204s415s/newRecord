@@ -17828,33 +17828,32 @@ var _datas_section_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__
       this.newCurriculum.next = this.date + ' ' + this.time;
       return this.newCurriculum.next;
     },
-    sentDatas: function sentDatas() {
+    // sentDatas() {
+    //     axios.get('/api/students' + this.studentId)
+    //         .then((res) => {
+    //             this.sentStudent = res.data;
+    //             console.log(res.data)
+    //         })
+    // },
+    selectEnter: function selectEnter() {
       var _this = this;
 
-      axios.get('/api/students/' + this.studentId).then(function (res) {
-        _this.sentStudent = res.data;
-        console.log(res.data);
-      });
-    },
-    selectEnter: function selectEnter() {
-      var _this2 = this;
-
       axios.get('/api/students/enter').then(function (res) {
-        _this2.enter = res.data;
+        _this.enter = res.data;
       });
     },
     selectStudents: function selectStudents() {
-      var _this3 = this;
+      var _this2 = this;
 
       axios.get('/api/' + this.selectedEnter).then(function (res) {
-        _this3.students = res.data;
+        _this2.students = res.data;
       });
     },
     showRecords: function showRecords() {
-      var _this4 = this;
+      var _this3 = this;
 
       axios.get('/api/students/' + this.newCurriculum.student_id + '/record').then(function (res) {
-        _this4.records = res.data;
+        _this3.records = res.data;
       });
     },
     checkForm: function checkForm() {
@@ -17865,14 +17864,16 @@ var _datas_section_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__
       }
     },
     submit: function submit() {
-      var _this5 = this;
+      var _this4 = this;
 
       axios.post('/api/record/curriculum', this.newCurriculum).then(function (res) {
-        //this.newCurriculum.next = this.date + this.time    
-        _this5.$router.push({
+        //this.newCurriculum.next = this.date + this.time  
+        console.log(res.data);
+
+        _this4.$router.push({
           name: 'student.show',
           params: {
-            studentId: _this5.newCurriculum.student_id
+            studentId: _this4.newCurriculum.student_id
           }
         });
       });
