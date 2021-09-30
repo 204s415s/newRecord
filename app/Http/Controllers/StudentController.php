@@ -28,46 +28,46 @@ class StudentController extends Controller {
         // //最新の進捗出したいやつ
         // //$studentsはコレクション！		  
         //$students = $student->get();
-        $records = Record::all();
-        $latests = new Collection([]);
-        $return = new Collection([]);
-        foreach($students as $student) {
+        // $records = Record::all();
+        // $latests = new Collection([]);
+        // $return = new Collection([]);
+        // foreach($students as $student) {
             
-            $exist = DB::table('records')->where('student_id', $student->id)->exists();
-            if($exist) {
-                $latests->push($records->sortByDesc('created_at')
-        		              ->whereIn('student_id', $student->id)
-        		              ->first());
+        //     $exist = DB::table('records')->where('student_id', $student->id)->exists();
+        //     if($exist) {
+        //         $latests->push($records->sortByDesc('created_at')
+        // 		              ->whereIn('student_id', $student->id)
+        // 		              ->first());
         		
-        		$curriculum_records = $curriculum_record->get();
-                $id1 = $curriculum_records->pluck('record_id')->toArray();
-                $project_records = $project_record->get();
-                $id2 = $project_records->pluck('record_id')->toArray();
-                $results = new Collection([]);
-                foreach($latests as $latest) {
-                    $key1 = in_array($latest->id, $id1);
-                    $key2 = in_array($latest->id, $id2);
-                    if($key1) {
-                        $curriculum_id = Curriculum_record::query()->where('record_id', '=', $latest->id)->get('curriculum_id')->toArray();
-                        $curriculum = Curriculum::query()->whereIn('id', $curriculum_id)->get();
-                        $results = $results->concat($curriculum);
-                    } else if ($key2) {
-                        $project_id = Project_record::query()->where('record_id', '=', $latest->id)->get('project_id')->toArray();
-                        $project = Project::query()->whereIn('id', $project_id)->get();
-                        $results = $results->concat($project);
-                    }
-                }
-                //$students = $students->concat($results);
-                //$results = $students->concat($results)->sortBy('student_id');
-                //$student = $student->concat($results);
-                $result = $results->toArray();
-                $item = array_merge($student->toArray(), $result[0]);
-                $return = $return->concat(collect($item));
-            } else {
-                //$return = array_push($return, $student->toArray());
-                //print_r($return);
-                //$return = $return->concat((collect($student)));
-            }
+        // 		$curriculum_records = $curriculum_record->get();
+        //         $id1 = $curriculum_records->pluck('record_id')->toArray();
+        //         $project_records = $project_record->get();
+        //         $id2 = $project_records->pluck('record_id')->toArray();
+        //         $results = new Collection([]);
+        //         foreach($latests as $latest) {
+        //             $key1 = in_array($latest->id, $id1);
+        //             $key2 = in_array($latest->id, $id2);
+        //             if($key1) {
+        //                 $curriculum_id = Curriculum_record::query()->where('record_id', '=', $latest->id)->get('curriculum_id')->toArray();
+        //                 $curriculum = Curriculum::query()->whereIn('id', $curriculum_id)->get();
+        //                 $results = $results->concat($curriculum);
+        //             } else if ($key2) {
+        //                 $project_id = Project_record::query()->where('record_id', '=', $latest->id)->get('project_id')->toArray();
+        //                 $project = Project::query()->whereIn('id', $project_id)->get();
+        //                 $results = $results->concat($project);
+        //             }
+        //         }
+        //         //$students = $students->concat($results);
+        //         //$results = $students->concat($results)->sortBy('student_id');
+        //         //$student = $student->concat($results);
+        //         $result = $results->toArray();
+        //         $item = array_merge($student->toArray(), $result[0]);
+        //         $return = $return->concat(collect($item));
+        //     } else {
+        //         //$return = array_push($return, $student->toArray());
+        //         //print_r($return);
+        //         //$return = $return->concat((collect($student)));
+        //     }
         }
         //dd($students);
         return $students;
