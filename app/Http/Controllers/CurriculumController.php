@@ -26,7 +26,7 @@ class CurriculumController extends Controller
     public function store(Request $request, Student $student) {
         //nextdate、nexttimeのカラム消したい
         $curriculum = new Curriculum;
-        $input = $request->input();
+        $input = $request->all();
         $curriculum->fill($input)->save();
         
         $record = new Record;
