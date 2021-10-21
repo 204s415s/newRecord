@@ -30,6 +30,7 @@ class ProjectController extends Controller
         $record->next = $request->input('next');
         $record->style = $request->input('style');
         $record->recorded_at = $request->input('recorded_at');
+        $record->type = 2;
         $record->save();
         
         $project_record = new Project_record;
