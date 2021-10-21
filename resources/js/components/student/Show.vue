@@ -53,10 +53,10 @@
             <div class="col-10 py-5">
             <body>
                 <p id="heading">面談記録</p>
-                
                 <div v-for="record in records">
                     <div class="box shadow-none">
-                        <span class="box-title">{{ record.recorded_at | record }}</span>
+                        <a class="box-title" @click="openModal(record)" v-bind:tabindex="-1">{{ record.recorded_at | record }}</a>
+                        <EditModal v-if="modal" @close="modal=false" v-bind:val="item"/>
                         <p>進捗： {{ record.progress }}</p>
                         <p v-if="record.topical != null">特筆事項： {{ record.topical }}</p>
                         <p v-else> </p>
@@ -74,7 +74,6 @@
             </body>
             </div>
         </div>   
-            
     </div>
     </div>
 </template>
@@ -82,11 +81,12 @@
  <script>
     
     import LineChart from '../graph/Line.js';
+    import EditModal from '../curriculum/EditModal.vue';
     export default {
         props: {
             studentId: String
         },
-        components: { LineChart },
+        components: { LineChart, EditModal },
         
         data: function() {
             return {
@@ -94,7 +94,6 @@
                 description: [],
                 records: [],
                 loginUser: null,
-                
                 loaded: false,
                 chartdata: null,
                 options: {
@@ -108,8 +107,15 @@
                             },
                         }]
                     },
-                }
+                },
+                item: '',
+                modal: false
             }
+        },
+        watch: {
+           modal() {
+               this.getRecord();
+           } 
         },
         methods: {
             getStudent() {
@@ -128,6 +134,7 @@
                 axios.get('/api/students/' + this.studentId + '/record')
                     .then((res) => {
                         this.records = res.data;
+                        console.log(this.records);
                     })
             },
             getData() {
@@ -146,15 +153,18 @@
                         }
                     })
             },
-            
+            openModal(record) {
+                this.modal = true;
+                this.item = record;
+                console.log(this.item);
+            }
         },
         mounted() {
             this.getLoginUser();
             this.loaded = true;
             this.getStudent();
             this.getRecord();
-            this.getData()
-            
+            this.getData();
         }
     }
 </script>

@@ -44,11 +44,15 @@ Route::get('/api/mypage/student', 'MypageController@student');
 Route::get('/api/mypage/calendar', 'MypageController@calendar');
 Route::get('/api/mypage/today', 'MypageController@today');
 
+Route::get('/api/record/{record}', 'RecordController@show');
+
 Route::get('/api/record/curriculum', 'CurriculumController@index');
 Route::post('/api/record/curriculum', 'CurriculumController@store');
+Route::put('/api/record/curriculum/{curriculum}', 'CurriculumController@update');
 
 Route::get('/api/record/project', 'ProjectController@index');
 Route::post('/api/record/project', 'ProjectController@store');
+Route::put('/api/record/project/{project}', 'ProjectController@update');
 
 Route::get('/api/{enter}', 'StudentController@select');
 
