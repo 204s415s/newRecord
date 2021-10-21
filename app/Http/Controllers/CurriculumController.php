@@ -45,4 +45,10 @@ class CurriculumController extends Controller
         
         return compact($curriculum, $record, $curriculum_record);
     }
+    
+    public function update(Curriculum $curriculum, Request $request) {
+        $data = $request->all();
+        $curriculum->fill($data)->save();
+        return $curriculum;
+    }
 }

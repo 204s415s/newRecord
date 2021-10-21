@@ -76,6 +76,12 @@ export default new VueRouter({
             component: ProjectRecord,
         },
         
+        // {
+        //     path: '/record/:recordId/edit',
+        //     name: 'record.edit',
+        //     component: 
+        // },
+        
         {
             path: '/mypage',
             name: 'mypage',
