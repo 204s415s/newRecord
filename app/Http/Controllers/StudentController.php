@@ -81,17 +81,23 @@ class StudentController extends Controller {
 	
 	//進捗記録表示
 	public function record(Student $student) {
-	    $records = Record::query()->where('student_id', '=', $student->id)->get('id')->toArray();
-		//Curriculum検索
-		$curriculum_id = Curriculum_record::query()->whereIn('record_id', $records)->get('curriculum_id')->toArray();
-		$curricula = Curriculum::query()->whereIn('id', $curriculum_id)->get();
-		//Project検索
-		$project_id = Project_record::query()->whereIn('record_id', $records)->get('project_id')->toArray();
-		$projects = Project::query()->whereIn('id', $project_id)->get();
-		//二つのColectionをまとめて日付で降順に
-		$results = $curricula->concat($projects)->sortByDesc('updated_at');
-		return $results;
-	    
+	    $records = Record::query()->where('student_id', '=', $student->id)->get();
+	    $results = new Collection([]);
+	    foreach($records as $record) {
+		    $exist = DB::table('curriculum_records')->where('record_id', $record->id)->exists();
+            if($exist) {
+                $curriculum_id = Curriculum_record::query()->where('record_id', $record->id)->get('curriculum_id')->toArray();
+                $curriculum = Curriculum::query()->where('id', '=', $curriculum_id)->get()->toArray();
+                $merge = array_merge($curriculum[0], array('record_id' => $record->id, 'type' => 1));
+                $results = $results->concat(collect([$merge]));
+            } else {
+                $project_id = Project_record::query()->where('record_id', $record->id)->get('project_id')->toArray();
+                $project = Project::query()->where('id', '=', $project_id)->get()->toArray();
+                $merge = array_merge($project[0], array('record_id' => $record->id, 'type' => 2));
+                $results = $results->concat(collect([$merge]));
+            }
+	    }
+	    return $results;
 	}
 	
 	// 理解度のグラフをつくる

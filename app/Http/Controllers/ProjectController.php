@@ -39,4 +39,10 @@ class ProjectController extends Controller
         
         return compact($project, $record, $project_record);
     }
+    
+    public function update(Project $project, Request $request) {
+        $data = $request->all();
+        $project->fill($data)->save();
+        return $project;
+    }
 }
