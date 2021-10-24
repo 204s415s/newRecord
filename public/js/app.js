@@ -93556,7 +93556,7 @@ var render = function() {
                         ? _c(
                             "p",
                             {
-                              staticClass: "col-sm-3 form-control-plaintext",
+                              staticClass: "col-sm-6 form-control-plaintext",
                               attrs: { readonly: "", id: "progress" }
                             },
                             [_vm._v(_vm._s(_vm.val.progress))]
@@ -93575,7 +93575,7 @@ var render = function() {
                                   expression: "newRecord.progress"
                                 }
                               ],
-                              staticClass: "col-sm-6 form-control pb-2",
+                              staticClass: "col-sm-7 form-control pb-2",
                               on: {
                                 change: function($event) {
                                   var $$selectedVal = Array.prototype.filter
@@ -93662,7 +93662,7 @@ var render = function() {
                                   "p",
                                   {
                                     staticClass:
-                                      "col-sm-3 form-control-plaintext",
+                                      "col-sm-7 form-control-plaintext",
                                     attrs: {
                                       type: "text",
                                       readonly: "",
@@ -93721,7 +93721,7 @@ var render = function() {
                           ? _c(
                               "p",
                               {
-                                staticClass: "col-sm-3 form-control-plaintext",
+                                staticClass: "col-sm-7 form-control-plaintext",
                                 attrs: {
                                   type: "text",
                                   readonly: "",
