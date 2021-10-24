@@ -93672,7 +93672,7 @@ var render = function() {
                         : _vm._e(),
                       _vm._v(" "),
                       _vm.edit && _vm.val.type == 2
-                        ? _c("input", {
+                        ? _c("textarea", {
                             directives: [
                               {
                                 name: "model",
@@ -93682,7 +93682,6 @@ var render = function() {
                               }
                             ],
                             staticClass: "col-sm-6 form-control",
-                            attrs: { type: "text" },
                             domProps: { value: _vm.newRecord.progress },
                             on: {
                               input: function($event) {
