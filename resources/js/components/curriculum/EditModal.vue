@@ -53,9 +53,6 @@
                     </select>
                     <input v-if="edit && val.type == 2" type="text" class="col-sm-6 form-control" v-model="newRecord.aim">
                 </div>
-               
-
-                
             </form>
           </div>
           <div class="modal-footer">

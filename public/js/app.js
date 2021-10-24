@@ -17760,9 +17760,6 @@ var _datas_section_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -93616,7 +93613,7 @@ var render = function() {
                         ? _c(
                             "p",
                             {
-                              staticClass: "col-sm-3 form-control-plaintext",
+                              staticClass: "col-sm-6 form-control-plaintext",
                               attrs: { readonly: "", id: "progress" }
                             },
                             [_vm._v(_vm._s(_vm.val.progress))]
@@ -93722,7 +93719,7 @@ var render = function() {
                                   "p",
                                   {
                                     staticClass:
-                                      "col-sm-3 form-control-plaintext",
+                                      "col-sm-6 form-control-plaintext",
                                     attrs: {
                                       type: "text",
                                       readonly: "",
@@ -93781,7 +93778,7 @@ var render = function() {
                           ? _c(
                               "p",
                               {
-                                staticClass: "col-sm-3 form-control-plaintext",
+                                staticClass: "col-sm-6 form-control-plaintext",
                                 attrs: {
                                   type: "text",
                                   readonly: "",
@@ -93823,7 +93820,7 @@ var render = function() {
                             "p",
                             {
                               staticClass:
-                                "white-space col-sm-7 form-control-plaintext",
+                                "white-space col-sm-6 form-control-plaintext",
                               attrs: { type: "text", id: "aim" }
                             },
                             [_vm._v(_vm._s(_vm.val.aim))]
