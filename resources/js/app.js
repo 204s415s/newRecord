@@ -24,7 +24,9 @@ import router from './plugins/router';
 import filter from './plugins/filter';
 import grades from './datas/grade.json';
 import VueTextareaAutosize from 'vue-textarea-autosize'
-
+import Toasted from 'vue-toasted';
+ 
+Vue.use(Toasted);
 Vue.use(filter);
 //Vue.use(grades)
 Vue.use(VueTextareaAutosize);

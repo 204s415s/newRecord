@@ -57,8 +57,8 @@
                     <div class="box shadow-none">
                         <a class="box-title" @click="openModal(record)" v-bind:tabindex="-1">{{ record.recorded_at | record }}</a>
                         <EditModal v-if="modal" @close="modal=false" v-bind:val="item"/>
-                        <p>進捗： {{ record.progress }}</p>
-                        <p v-if="record.topical != null">特筆事項： {{ record.topical }}</p>
+                        <p class="white-space">進捗： {{ record.progress }}</p>
+                        <p v-if="record.topical != null" class="white-space">特筆事項： {{ record.topical }}</p>
                         <p v-else> </p>
                         <p class="white-space">質問： {{ record.question }}</p>
                         <p>目標： {{ record.aim }}</p>
@@ -109,7 +109,7 @@
                     },
                 },
                 item: '',
-                modal: false
+                modal: false,
             }
         },
         watch: {
@@ -157,7 +157,8 @@
                 this.modal = true;
                 this.item = record;
                 console.log(this.item);
-            }
+            },
+            
         },
         mounted() {
             this.getLoginUser();

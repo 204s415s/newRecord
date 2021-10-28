@@ -10,7 +10,8 @@ import StudentGraph from '../components/student/Graph';
 import CurriculumRecord from '../components/curriculum/Record';
 import ProjectRecord from '../components/project/Record';
 import Mypage from '../components/user/Mypage';
-import Table from '../components/student/Progress'
+import Table from '../components/student/Progress';
+import Sample from '../components/Sample';
 //import Calendar from '../components/user/Calendar';
 //import Today from '../components/user/Today';
 
@@ -25,7 +26,11 @@ export default new VueRouter({
             name: 'index',
             component: Index
         },
-        
+        {
+            path: '/sample',
+            name: 'sample',
+            component: Sample
+        },
         {
             path: '/students',
             name: 'student.list',
