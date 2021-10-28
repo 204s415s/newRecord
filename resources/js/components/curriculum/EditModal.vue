@@ -22,11 +22,7 @@
                 <div class="form-group row border-bottom">
                     <label for="progress" class="col-sm-5 col-form-label">進捗</label>
                     <p v-if="!edit" class="col-sm-6 form-control-plaintext" readonly id="progress">{{val.progress}}</p>
-<<<<<<< HEAD
                     <select v-if="edit && val.type == 1" class="col-sm-6 form-control pb-2" v-model="newRecord.progress">
-=======
-                    <select v-if="edit && val.type == 1" class="col-sm-7 form-control pb-2" v-model="newRecord.progress">
->>>>>>> db958e43cda0855e168a884b9f0cbe611d990cee
                             <option v-for="section in sections" v-bind:value="section.value" >
                                 {{ section.value }}
                             </option>
@@ -36,11 +32,7 @@
                 
                 <div class="form-group row border-bottom" v-if="val.type == 2">
                     <label for="topical" class="col-sm-5 col-form-label">特筆事項</label>
-<<<<<<< HEAD
                     <p v-if="!edit" type="text" class="col-sm-6 form-control-plaintext" readonly id="topical">{{val.topical}}</p>
-=======
-                    <p v-if="!edit" type="text" class="col-sm-7 form-control-plaintext" readonly id="topical">{{val.topical}}</p>
->>>>>>> db958e43cda0855e168a884b9f0cbe611d990cee
                     <input v-if="edit" type="text" class="col-sm-6 form-control" v-model="newRecord.topical">
                 </div>
                 <div class="form-group" v-else>
@@ -48,11 +40,7 @@
                 
                 <div class="form-group row border-bottom">
                     <label for="question" class="col-sm-5 col-form-label">質問</label>
-<<<<<<< HEAD
                     <p v-if="!edit" type="text" class="col-sm-6 form-control-plaintext" readonly id="question">{{val.question}}</p>
-=======
-                    <p v-if="!edit" type="text" class="col-sm-7 form-control-plaintext" readonly id="question">{{val.question}}</p>
->>>>>>> db958e43cda0855e168a884b9f0cbe611d990cee
                     <textarea-autosize v-if="edit" class="col-sm-6 form-control" v-model="newRecord.question"></textarea-autosize>
                 </div>
                 <div class="form-group row border-bottom">
