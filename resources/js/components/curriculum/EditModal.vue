@@ -21,8 +21,8 @@
                 </div>
                 <div class="form-group row border-bottom">
                     <label for="progress" class="col-sm-5 col-form-label">進捗</label>
-                    <p v-if="!edit" class="col-sm-3 form-control-plaintext" readonly id="progress">{{val.progress}}</p>
-                    <select v-if="edit && val.type == 1" class="col-sm-6 form-control pb-2" v-model="newRecord.progress">
+                    <p v-if="!edit" class="col-sm-6 form-control-plaintext" readonly id="progress">{{val.progress}}</p>
+                    <select v-if="edit && val.type == 1" class="col-sm-7 form-control pb-2" v-model="newRecord.progress">
                             <option v-for="section in sections" v-bind:value="section.value" >
                                 {{ section.value }}
                             </option>
@@ -32,7 +32,7 @@
                 
                 <div class="form-group row border-bottom" v-if="val.type == 2">
                     <label for="topical" class="col-sm-5 col-form-label">特筆事項</label>
-                    <p v-if="!edit" type="text" class="col-sm-3 form-control-plaintext" readonly id="topical">{{val.topical}}</p>
+                    <p v-if="!edit" type="text" class="col-sm-7 form-control-plaintext" readonly id="topical">{{val.topical}}</p>
                     <input v-if="edit" type="text" class="col-sm-6 form-control" v-model="newRecord.topical">
                 </div>
                 <div class="form-group" v-else>
@@ -40,7 +40,7 @@
                 
                 <div class="form-group row border-bottom">
                     <label for="question" class="col-sm-5 col-form-label">質問</label>
-                    <p v-if="!edit" type="text" class="col-sm-3 form-control-plaintext" readonly id="question">{{val.question}}</p>
+                    <p v-if="!edit" type="text" class="col-sm-7 form-control-plaintext" readonly id="question">{{val.question}}</p>
                     <textarea-autosize v-if="edit" class="col-sm-6 form-control" v-model="newRecord.question"></textarea-autosize>
                 </div>
                 <div class="form-group row border-bottom">
@@ -77,6 +77,8 @@
     z-index: 10;
     background-color: rgba(0,0,0,0.50);
   }
+  
+  
 </style>
 
 <script>
@@ -108,6 +110,11 @@
                 prev: '',
                 btn: false,
                 edit: false,
+                options: {
+                    position: 'top-center',
+                    duration: 2000,
+                    className: ['toasting']
+                }
             }
         },
         methods: {
@@ -115,11 +122,13 @@
                 if(this.val.type == 1) {
                     axios.put('/api/record/curriculum/' + this.newRecord.id, this.newRecord)
                         .then((res => {
+                            this.message();
                             this.$emit('close');
                         }))
                 } else if (this.val.type == 2) {
                     axios.put('/api/record/project/' + this.newRecord.id, this.newRecord)
                         .then((res => {
+                            this.message();
                             this.$emit('close');
                         }))
                 }
@@ -131,7 +140,10 @@
                         console.log(res.data);
                         this.newRecord = res.data[0];
                     })
-            }
+            },
+            message(){
+                this.$toasted.show('更新しました', this.options);
+            },
         },
         mounted() {
             //this.showRecords();

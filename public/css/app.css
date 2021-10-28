@@ -11071,3 +11071,8 @@ a.text-dark:focus {
   border-radius: 3px 3px 3px 3px;
 }
 
+.toasting {
+  color: white !important;
+  background-color: #2e4790 !important;
+}
+

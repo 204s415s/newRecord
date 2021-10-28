@@ -15,19 +15,19 @@
         
         <div class="row">
         <table class="table table-bordered">
-            <thead class="thead" >
+            <thead class="thead">
             <tr>
-                <th class="col-md-2" @click="sortBy('enter')" :class="addClass('enter')">入学年月</th>
-                <th class="col-md-2" @click="sortBy('student_name')" :class="addClass('student_name')">名前</th>
-                <th class="col-md-2" @click="sortBy('grade')" :class="addClass('grade')">学年</th>
-                <th class="col-md-2" @click="sortBy('user_id')"  :class="addClass('user_id')">担当メンター</th>
-                <th class="col-md-2">詳細</th>
-                <th class="col-md-2">削除</th>
+                <th class="col-2" @click="sortBy('enter')" :class="addClass('enter')">入学年月</th>
+                <th class="col-2" @click="sortBy('student_name')" :class="addClass('student_name')">名前</th>
+                <th class="col-2" @click="sortBy('grade')" :class="addClass('grade')">学年</th>
+                <th class="col-2" @click="sortBy('user_id')"  :class="addClass('user_id')">担当メンター</th>
+                <th class="col-2">詳細</th>
+                <th class="col-2">削除</th>
             </tr>
             </thead>
             <tbody>
                 <tr v-for="student in sortStudents">
-                    <td scope="row">{{ student.enter | enter}}</td>
+                    <td>{{ student.enter | enter}}</td>
                     <td>{{ student.student_name }}</td>
                     <td>{{ student.grade }}</td>
                     <td>{{ student.user.name}}</td>
@@ -81,6 +81,11 @@
                 student: [],
                 sort_key: "",
                 sort_asc: true,
+                options: {
+                    position: 'top-center',
+                    duration: 2000,
+                    className: ['toasting']
+                }
             }
         },
         computed: {
@@ -113,6 +118,7 @@
                 
                 });
             },
+            
             getLoginUser() {
                 axios.get('/api/users/login')
                     .then((res) => {
@@ -145,6 +151,7 @@
                             if (confirm('本当に削除しますか？')) {
                                 axios.delete('/api/students/' + id, {data: this.student})
                                     .then((res) => {
+                                        this.$toasted.show('削除しました', this.options);
                                         this.getStudents().catch(err => {});
                                         //this.$router.push({name:'student.list'}).catch(err => {})
                                     })
@@ -153,7 +160,10 @@
                             alert("権限がありません")
                         }
                     })
-            }
+            },
+            message(){
+                this.$toasted.show('更新しました', this.options);
+            },
             
         },
         mounted() {

@@ -107,7 +107,12 @@
                     {id: 11, value:'11'},
                     {id: 12, value:'12'}
                 ],
-                clear: false
+                clear: false,
+                options: {
+                    position: 'top-center',
+                    duration: 2000,
+                    className: ['toasting']
+                }
             }
         },
         watch: {
@@ -149,7 +154,11 @@
                 axios.post('/api/students', this.newStudent)
                     .then((res) => {
                         this.$router.push({name: 'student.list'});
+                        this.message();
                     });
+            },
+            message(){
+                this.$toasted.show('登録しました', this.options);
             }
         },
         created() {
