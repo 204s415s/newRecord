@@ -77,6 +77,8 @@
     z-index: 10;
     background-color: rgba(0,0,0,0.50);
   }
+  
+  
 </style>
 
 <script>
@@ -108,6 +110,11 @@
                 prev: '',
                 btn: false,
                 edit: false,
+                options: {
+                    position: 'top-center',
+                    duration: 2000,
+                    className: ['toasting']
+                }
             }
         },
         methods: {
@@ -115,11 +122,13 @@
                 if(this.val.type == 1) {
                     axios.put('/api/record/curriculum/' + this.newRecord.id, this.newRecord)
                         .then((res => {
+                            this.message();
                             this.$emit('close');
                         }))
                 } else if (this.val.type == 2) {
                     axios.put('/api/record/project/' + this.newRecord.id, this.newRecord)
                         .then((res => {
+                            this.message();
                             this.$emit('close');
                         }))
                 }
@@ -131,7 +140,10 @@
                         console.log(res.data);
                         this.newRecord = res.data[0];
                     })
-            }
+            },
+            message(){
+                this.$toasted.show('更新しました', this.options);
+            },
         },
         mounted() {
             //this.showRecords();
