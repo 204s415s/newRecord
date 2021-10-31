@@ -42,6 +42,8 @@
                         </div>
                     </div>
                 </form>
+                <p id="heading">最新進捗</p>
+                {{ latest }}
                 </div>
                 <div class="com-8 pb-1">
                     <LineChart v-if="loaded" :chartData="chartdata" :options="options"></LineChart>
@@ -56,12 +58,17 @@
                 <div v-for="record in records">
                     <div class="box shadow-none">
                         <a class="box-title" @click="openModal(record)" v-bind:tabindex="-1">{{ record.recorded_at | record }}</a>
+                        
                         <EditModal v-if="modal" @close="modal=false" v-bind:val="item"/>
-                        <p class="white-space">進捗： {{ record.progress }}</p>
-                        <p v-if="record.topical != null" class="white-space">特筆事項： {{ record.topical }}</p>
-                        <p v-else> </p>
-                        <p class="white-space">質問： {{ record.question }}</p>
-                        <p>目標： {{ record.aim }}</p>
+                        <table>
+                            <tbody>
+                        <tr class="white-space"><td class="col-2">進捗：</td><td>{{ record.progress }}</td></tr>
+                        <tr v-if="record.topical != null" class="white-space"><td class="col-2 pr-0">特筆事項：</td><td>{{ record.topical }}</td></tr>
+                        <tr v-else> </p>
+                        <tr class="white-space"><td class="col-2">質問：</td><td>{{ record.question }}</td></tr>
+                        <tr><td class="col-2">目標：</td><td>{{ record.aim }}</td></tr>
+                        </tbody>
+                        </table>
                     </div>
                 </div>
                 <li class="dropdown dropright">
@@ -77,6 +84,9 @@
     </div>
     </div>
 </template>
+<style>
+    
+</style>
  
  <script>
     
@@ -110,6 +120,7 @@
                 },
                 item: '',
                 modal: false,
+                latest: '',
             }
         },
         watch: {
@@ -153,6 +164,12 @@
                         }
                     })
             },
+            getLatest() {
+                axios.get('/api/students/' + this.studentId + '/latest')
+                    .then((res) => {
+                        this.latest = res.data;
+                    })
+            },
             openModal(record) {
                 this.modal = true;
                 this.item = record;
@@ -166,6 +183,7 @@
             this.getStudent();
             this.getRecord();
             this.getData();
+            this.getLatest();
         }
     }
 </script>
