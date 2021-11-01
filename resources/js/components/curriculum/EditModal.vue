@@ -27,7 +27,7 @@
                                 {{ section.value }}
                             </option>
                     </select>
-                    <textarea v-if="edit && val.type == 2" class="col-sm-6 form-control" v-model="newRecord.progress"></textarea>
+                    <textarea-autosize v-if="edit && val.type == 2" class="col-sm-6 form-control" v-model="newRecord.progress"></textarea-autosize>
                 </div>
                 
                 <div class="form-group row border-bottom" v-if="val.type == 2">

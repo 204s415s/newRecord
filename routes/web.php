@@ -37,6 +37,7 @@ Route::post('/api/students', 'StudentController@store');
 Route::get('/api/students/{student}', 'StudentController@show');
 Route::get('/api/students/{student}/record', 'StudentController@record');
 Route::get('/api/students/{student}/level', 'StudentController@level');
+Route::get('/api/students/{student}/latest', 'StudentController@latest');
 Route::put('/api/students/{student}', 'StudentController@update');
 Route::delete('/api/students/{student}', 'StudentController@destroy');
 
