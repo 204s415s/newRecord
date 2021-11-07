@@ -28,7 +28,6 @@ class StudentController extends Controller {
     
     //生徒詳細表示
     public function show(Student $student) {
-        //$description = $student->description;
         return $student;
 	}
 	
@@ -90,9 +89,9 @@ class StudentController extends Controller {
                 $check = count($value);
                 if ($check == 7) {
                     if($value[6] == "TRUE") {
-                        continue;;
+                        continue;
                     } else {
-                        return $value[1] . " " . $value[4]. "日";
+                        return ["section" => $value[1], "days" => abs((int) $value[4])];
                     }
                 } else {
                     continue;

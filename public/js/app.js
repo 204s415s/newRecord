@@ -19181,6 +19181,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -19215,7 +19220,10 @@ __webpack_require__.r(__webpack_exports__);
       },
       item: '',
       modal: false,
-      latest: ''
+      latest: {
+        section: '',
+        days: ''
+      }
     };
   },
   watch: {
@@ -96554,7 +96562,28 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("p", { attrs: { id: "heading" } }, [_vm._v("最新進捗")]),
-          _vm._v("\n            " + _vm._s(_vm.latest) + "\n            ")
+          _vm._v(" "),
+          _vm.latest.days >= 0
+            ? _c("div", [
+                _c("p", { staticClass: "pl-3" }, [
+                  _vm._v(
+                    _vm._s(_vm.latest.section) +
+                      " あと" +
+                      _vm._s(_vm.latest.days) +
+                      "日"
+                  )
+                ])
+              ])
+            : _c("div", [
+                _c("p", { staticClass: "pl-3" }, [
+                  _vm._v(
+                    _vm._s(_vm.latest.section) +
+                      " " +
+                      _vm._s(_vm.latest.days) +
+                      "日遅れ"
+                  )
+                ])
+              ])
         ]),
         _vm._v(" "),
         _c(
@@ -96640,7 +96669,8 @@ var render = function() {
                                 ]),
                                 _c("td", [_vm._v(_vm._s(record.topical))])
                               ])
-                            : _c("tr", [_c("p")]),
+                            : _c("tr"),
+                          _vm._v(" "),
                           _c("tr", { staticClass: "white-space" }, [
                             _c("td", { staticClass: "col-2" }, [
                               _vm._v("質問：")

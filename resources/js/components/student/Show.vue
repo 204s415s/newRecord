@@ -43,7 +43,12 @@
                     </div>
                 </form>
                 <p id="heading">最新進捗</p>
-                {{ latest }}
+                <div v-if="latest.days >= 0">
+                    <p class="pl-3">{{ latest.section }} あと{{latest.days}}日</p>
+                </div>
+                <div v-else>
+                    <p class="pl-3">{{ latest.section }} {{latest.days}}日遅れ</p>
+                </div>
                 </div>
                 <div class="com-8 pb-1">
                     <LineChart v-if="loaded" :chartData="chartdata" :options="options"></LineChart>
@@ -64,7 +69,7 @@
                             <tbody>
                         <tr class="white-space"><td class="col-2">進捗：</td><td>{{ record.progress }}</td></tr>
                         <tr v-if="record.topical != null" class="white-space"><td class="col-2 pr-0">特筆事項：</td><td>{{ record.topical }}</td></tr>
-                        <tr v-else> </p>
+                        <tr v-else> </tr>
                         <tr class="white-space"><td class="col-2">質問：</td><td>{{ record.question }}</td></tr>
                         <tr><td class="col-2">目標：</td><td>{{ record.aim }}</td></tr>
                         </tbody>
@@ -120,7 +125,10 @@
                 },
                 item: '',
                 modal: false,
-                latest: '',
+                latest: {
+                    section: '',
+                    days: ''
+                },
             }
         },
         watch: {
