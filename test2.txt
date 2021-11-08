@@ -1,2 +1,0 @@
-merge only
-not fetch, pull
