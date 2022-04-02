@@ -119,6 +119,7 @@
                 axios.get('/api/students/enter')
                     .then((res) => {
                         this.enter = res.data;
+                        
                     })
             },
             selectStudents: function() {

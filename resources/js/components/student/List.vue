@@ -21,6 +21,7 @@
                 <th class="col-2" @click="sortBy('student_name')" :class="addClass('student_name')">名前</th>
                 <th class="col-2" @click="sortBy('grade')" :class="addClass('grade')">学年</th>
                 <th class="col-2" @click="sortBy('user_id')"  :class="addClass('user_id')">担当メンター</th>
+                <th class="col-2">進捗</th>
                 <th class="col-2">詳細</th>
                 <th class="col-2">削除</th>
             </tr>
@@ -30,7 +31,8 @@
                     <td>{{ student.enter | enter}}</td>
                     <td>{{ student.student_name }}</td>
                     <td>{{ student.grade }}</td>
-                    <td>{{ student.user.name}}</td>
+                    <td>{{ student.user}}</td>
+                    
                     <td>
                         <router-link v-bind:to="{name: 'student.show', params: {studentId: student.id}}">
                             <button class="btn btn-an">Show</button>
@@ -109,6 +111,7 @@
                 axios.get('/api/students')
                     .then((res) => {
                         this.students = res.data
+                        console.log(res.data);
                 //         .sort((a, b) => {
                 //         if (a[enter] < b[enter]) return -1;
                 //         if (a[enter] > b[enter]) return 1;

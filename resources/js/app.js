@@ -19,6 +19,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 import Vue from 'vue';
+import vuetify from './plugins/vuetify' // path to vuetify export
 import Header from './components/Header';
 import router from './plugins/router';
 import filter from './plugins/filter';
@@ -54,5 +55,6 @@ const app = new Vue({
     el: '#app',
     router,
     filter,
+    vuetify,
     //grades: grades
 });

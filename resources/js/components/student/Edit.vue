@@ -71,6 +71,9 @@
             }
         },
         methods: {
+            select() {
+                console.log(this.studentId);
+            },
             getStudent() {
                 axios.get('/api/students/' + this.studentId)
                     .then((res) => {
@@ -99,6 +102,7 @@
             }
         },
         created() {
+            this.select();
             this.getStudent();
             this.selectMentors();
         }

@@ -28,6 +28,11 @@ class Student extends Model
         return $this->hasMany(Record::class);
     }
     
+    // public function latestRecord() {
+    //     return $this->hasOne(Record::class)
+    //             ->orderBy('created_at', 'desc');
+    // }
+    
     public function curricula() {
         return $this->hasMany(Curriculum::class);
     }

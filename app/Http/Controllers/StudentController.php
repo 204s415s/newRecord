@@ -23,7 +23,47 @@ class StudentController extends Controller {
     //生徒一覧表示
     public function index(Student $student, Curriculum_record $curriculum_record, Project_record $project_record) {
         $students = Student::with('user')->get(); //リレーション関係にあるものも一緒に渡す
-        return $students;
+        
+        // //最新の進捗出したいやつ
+        // //$studentsはコレクション！		  
+        //$students = $student->get();
+        $records = Record::all();
+        $latests = new Collection([]);
+        $return = new Collection([]);
+        foreach($students as $student) {
+            $exist = DB::table('records')->where('student_id', $student->id)->exists();
+            if($exist) {
+                $latest = Student::find($student->id)->records()->orderBy('created_at', 'desc')->first();
+                //echo $latest->type; //studentsのid=1の、recordsの最新のレコードが入ってる
+                //typeが1ならカリキュラム、2なら成果物っていうように変えられる？
+                //echo $latest;
+                if ($latest->type == 1) {
+                    $curriculum_id = Curriculum_record::query()->where('record_id', '=', $latest->id)->get('curriculum_id');
+                    $progress = Curriculum::query()->whereIn('id', $curriculum_id)->get()->toArray();
+                } elseif ($latest->type == 2) {
+                    $project_id = Project_record::query()->where('record_id', '=', $latest->id)->get('project_id');
+                    $progress = Project::query()->whereIn('id', $project_id)->get()->toArray();
+                    
+                }
+       
+                // $i = 1;
+                // $return = $return->put($i, collect($student)->put('progress', $progress[0]));
+                // $i++;
+                
+                print_r($progress); //出力できてるぽい
+            } else {
+                //echo "NULL";
+                continue;
+                // $return = array_push($return, $student->toArray());
+                // //print_r($return);
+                // $return = $return->concat((collect($student)));
+            }
+        }
+        
+        //print_r($progress);
+        //dd($return);
+        //return $return;
+        
     }
     
     //生徒詳細表示

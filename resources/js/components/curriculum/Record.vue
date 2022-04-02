@@ -121,7 +121,7 @@
         data: function() {
             return {
                 students: {},
-                sentStudent: {},
+                //sentStudent: {},
                 newCurriculum: {
                     student_id: '',
                     progress: '',
@@ -167,6 +167,17 @@
             }
         },
         methods: {
+            dataSet() {
+              if (this.studentId != null) {
+                  axios.get('/api/students/' + this.studentId)
+                    .then((res) => {
+                        //this.enter = res.data.enter
+                        this.selectedEnter = res.data.enter;
+                        this.selectStudents();
+                        this.newCurriculum.student_id = res.data.id;
+                    })
+              } 
+            },
             dateset() {
                 this.newCurriculum.next = this.date + ' ' + this.time;
                 return this.newCurriculum.next
@@ -178,7 +189,7 @@
             //             console.log(res.data)
             //         })
             // },
-            selectEnter() {
+            selectEnter(enter) {
                 axios.get('/api/students/enter')
                     .then((res) => {
                         this.enter = res.data;
@@ -203,19 +214,19 @@
                 } else {
                     return this.clear = false;
                 }
-                console.log(this.newCurriculum);
             },
             submit() {
                 axios.post('/api/record/curriculum', this.newCurriculum)
                     .then((res) => {
-                        //this.newCurriculum.next = this.date + this.time  
-                        console.log(this.newCurriculum);
+                        //this.newCurriculum.next = this.date + this.time
                         this.$router.push({name: 'student.show', params: {studentId: this.newCurriculum.student_id}});
                  });
             }
         },
         mounted() {
+            this.dataSet();
             this.checkForm();
+            //this.selectedEnter()
             this.selectEnter();
             this.selectStudents();
             //this.sentDatas();

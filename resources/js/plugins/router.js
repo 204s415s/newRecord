@@ -73,6 +73,7 @@ export default new VueRouter({
             path: '/record/curriculum',
             name: 'curriculum.record',
             component: CurriculumRecord,
+            props: true,
         },
         
         {
